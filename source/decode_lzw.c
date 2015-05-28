@@ -25,7 +25,7 @@ void decode()
 	init_dico();
 	taille= getSize();
 	code = lire_code(taille); // TODO: fonction lire_code qui lit (taille) bits correspondant aux bits significatifs du code et renvoie la valeur en int du code
-	chaine = find_string(code);
+	chaine = find_string(code); //TODO: find_string qui renvoie la chaine qui correspond au code dans le dico
 	
 	ecrire_caractere(chaine);
 	while(code != 257)
