@@ -131,7 +131,7 @@ void ecrire_code(uint16_t code, int taille) { // Gestion de fin de fichier -> si
 		write_buffer = (buffer & masque) >> nb_buf;
 
 		#ifdef DEBUG
-			printf("Buffer : %08x\n", buffer);
+			printf("Buffer : %08x et nb_buf = %d\n", buffer, nb_buf);
 			printf("Buffer d'écriture : %04x\n", write_buffer);
 		#endif
 
@@ -149,12 +149,13 @@ void ecrire_code(uint16_t code, int taille) { // Gestion de fin de fichier -> si
 	#endif
 }
 
-void vider_buffer_code() {
+void fin_de_fichier(uint16_t code, int taille) {
 	uint16_t write_buffer = 0x0000;
 	uint32_t masque;
+	int dep;
 
 	while(nb_buf > 0) {
-		(nb_buf >= 16) ? (nb_buf -= 16) : (nb_buf = 0);
+		if (nb_buf >= 16) { nb_buf = nb_buf - 16; dep = 0; } else { dep = 16 - nb_buf; nb_buf = 0; }
 
 		masque = 0x0000ffff << nb_buf;
 
@@ -162,10 +163,10 @@ void vider_buffer_code() {
 			printf("Ecriture dans le fichier\n");
 		#endif
 
-		write_buffer = (buffer & masque) >> nb_buf;
+		write_buffer = ((buffer << dep) & masque) >> nb_buf;
 
 		#ifdef DEBUG
-			printf("Buffer : %08x\n", buffer);
+			printf("Buffer : %08x et nb_buf = %d\n", buffer, nb_buf);
 			printf("Buffer d'écriture : %04x\n", write_buffer);
 		#endif
 
