@@ -1,4 +1,4 @@
-#include ../include/dictionnaire.h
+#include "../include/dictionnaire.h"
 #include <string.h>
 
 ////////////////////////////////////////////////////////////////
@@ -35,6 +35,7 @@ int init_dico(){
 int isExist(char * c){
     int sizec = strlen(c); //convertion automatique de size_t en int
     int i, j;
+    Dico * newdico = d;
 
     /**On parcours la chaine de caractere*/
     for (i=0; i < sizec; i++){
@@ -53,7 +54,7 @@ int isExist(char * c){
                  }
                  // Si on trouve le premier caractere et que le pointeur vers down n'est pas null alors on poursuit la recherche
                  else {
-                     new Dico * newdico = d[j]->down; //on recupere un pointeur vers la bonne liste chainee
+                     newdico = d[j]->down; //on recupere un pointeur vers la bonne liste chainee
                      break ; // on sort de la boucle for(j=0, j < 259, j++)
                  }
             }

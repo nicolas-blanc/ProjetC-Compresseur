@@ -3,8 +3,8 @@
 typedef struct cell {
 char* string;
 unsigned int code;
-cell* next;
-cell* down;
+struct cell* next;
+struct cell* down;
 } cell;
 
 
@@ -12,10 +12,10 @@ typedef struct tab {
 char car;
 unsigned int code;
 cell* down;
-} cell_tab;
+} tab;
 
 
-typedef tab Dico[258];
+tab Dico[258];
 // case 256: taille, case 257: EOF, case 258: bit clear (reset dico)
 
 ////////////////////////////////////////////////////////////////
@@ -41,12 +41,12 @@ void growSize();
 ////////////////////////////////////////////////////////////////
 // Author : Quentin
 //
-dico init(dico d);
+void init();
 
 ////////////////////////////////////////////////////////////////
 // Author : Coralie
 //
-bool isExist(char c);
+int isExist(char c);
 
 
 
