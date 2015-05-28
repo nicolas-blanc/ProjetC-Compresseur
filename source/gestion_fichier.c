@@ -1,57 +1,89 @@
-#include "gestion_fichier.h"
+#include "../include/gestion_fichier.h"
 
-#define MAX_BUFFER 26
+#define MAX_BUFFER 32
 
-static File * fin;
-static File * fout;
+static FILE* fin;
+static FILE* fout;
 
 static int fdf;
 
-static int buffer[MAX_BUFFER];
+static uint32_t buffer;
 static int nb_buf;
 
 int init_fichier_compression(char * nom_fin, char * nom_fout) {
+	#ifdef DEBUG
+		printf("Debut init_fichier_compression\n");
+	#endif
+	
 	fin = NULL;
 	fout = NULL;
 	fdf = -1;
 	nb_buf = 0;
+	buffer = 0x00000000;
 
 	int e = 0;
 
-	char * ajout_fin = "../";
-	char * ajout_fout = "../";
+	char * ajout_fin = malloc (sizeof(char) * (strlen(nom_fin) + 3));
+	strcpy(ajout_fin,"../");
+	char * ajout_fout = malloc (sizeof(char) * (strlen(nom_fout) + 3));
+	strcpy(ajout_fout,"../");
 
-	ajout_fin = strcat(ajout_fin,nom_fin);
-	ajout_fout = strcat(ajout_fout,nom_fout);
+	strcat(ajout_fin,nom_fin);
+	strcat(ajout_fout,nom_fout);
+
+	#ifdef DEBUG
+		printf("Nom final du fichier fin : %s\n", ajout_fin);
+		printf("Nom final du fichier fout : %s\n", ajout_fout);
+	#endif
 
 	fin = fopen(nom_fin,"r");
 	fout = fopen(nom_fout,"wb+");
 
 	if (fin == NULL || fout == NULL)
 		e--;
+
+	#ifdef DEBUG
+		printf("Fin init_fichier_compression\n");
+	#endif
 		
 	return e;
 }
 
-int init_fichier_compression_decompression(char * nom_fin, char * nom_fout) {
+int init_fichier_decompression(char * nom_fin, char * nom_fout) {
+	#ifdef DEBUG
+		printf("Debut init_fichier_decompression\n");
+	#endif
+	
 	fin = NULL;
 	fout = NULL;
 	fdf = -1;
 	nb_buf = 0;
+	buffer = 0x00000000;
 
 	int e = 0;
 
-	char * ajout_fin = "../";
-	char * ajout_fout = "../";
+	char * ajout_fin = malloc (sizeof(char) * (strlen(nom_fin) + 3));
+	strcpy(ajout_fin,"../");
+	char * ajout_fout = malloc (sizeof(char) * (strlen(nom_fout) + 3));
+	strcpy(ajout_fout,"../");
 
-	ajout_fin = strcat(ajout_fin,nom_fin);
-	ajout_fout = strcat(ajout_fout,nom_fout);
+	strcat(ajout_fin,nom_fin);
+	strcat(ajout_fout,nom_fout);
+
+	#ifdef DEBUG
+		printf("Nom final du fichier fin : %s\n", ajout_fin);
+		printf("Nom final du fichier fout : %s\n", ajout_fout);
+	#endif
 
 	fin = fopen(nom_fin,"rb");
 	fout = fopen(nom_fout,"w+");
 
 	if (fin == NULL || fout == NULL)
 		e--;
+
+	#ifdef DEBUG
+		printf("Fin init_fichier_decompression\n");
+	#endif
 		
 	return e;
 }
@@ -61,7 +93,7 @@ void close() {
 	fclose(fout);
 }
 
-int EOF() {
+int eof() {
 	return fdf;
 }
 
@@ -69,29 +101,95 @@ void ecrire_char(char * chaine) {
 	fputs(chaine, fout);
 }
 
-void ecrire_code(unsigned int code, int taille) {
-	char write_buffer[2];
-	
-	int masque = 0x0001;
+void ecrire_code(uint16_t code, int taille) { // Gestion de fin de fichier -> si le buffer est encore plein
+	uint16_t write_buffer = 0x0000;
+	uint32_t masque;
 
-	for (int j = 0; j < taille; j++) {
-		buffer[nb_buf+j] = masque & code;
-		masque = masque << 2;
+	#ifdef DEBUG
+		printf("Buffer d'écriture : %04x\n", write_buffer);
+		printf("Code : %04x\n", code);
+	#endif
+
+/*	uint32_t code_temp = 0x00000000;
+	if(nb_buf == 0)
+		code_temp = code;
+	else {
+		code_temp = code << nb_buf;
 	}
+*/
+
+	buffer = (buffer << taille) | code;
 
 	nb_buf = nb_buf + taille;
 
-	while (nb_buf >= 15) {
-		for (int i = 0; i < 16; i++)
-			write_buffer[abs(i/8)] = write_buffer[abs(i/8)] | (buffer[i] << pow(2,i));
+	#ifdef DEBUG
+		printf("Buffer : %08x et nb_buf = %d\n", buffer, nb_buf);
+	#endif
 
-		for (i; i < MAX_BUFFER; i++)
-			buffer[i-16] = buffer[i];
-
+	int i;
+	while (nb_buf >= 16) {
 		nb_buf = nb_buf - 16;
 
-		fwrite(write_buffer,sizeof(char),2,fout);
+		masque = 0x0000ffff << nb_buf;
+
+		#ifdef DEBUG
+			printf("Ecriture dans le fichier\n");
+		#endif
+
+		write_buffer = (buffer & masque) >> nb_buf;
+
+		#ifdef DEBUG
+			printf("Buffer : %08x\n", buffer);
+			printf("Buffer d'écriture : %04x\n", write_buffer);
+		#endif
+
+		buffer = buffer & ~masque;
+
+		#ifdef DEBUG
+			printf("Buffer après déplacement: %08x\n", buffer);
+		#endif
+
+		fwrite(&write_buffer,sizeof(uint16_t),1,fout);
 	}
+
+	#ifdef DEBUG
+		printf("\n\n");
+	#endif
+}
+
+void vider_buffer_code() {
+	uint16_t write_buffer = 0x0000;
+	uint32_t masque;
+
+	while(nb_buf > 0) {
+		(nb_buf >= 16) ? (nb_buf -= 16) : (nb_buf = 0);
+
+		masque = 0x0000ffff << nb_buf;
+
+		#ifdef DEBUG
+			printf("Ecriture dans le fichier\n");
+		#endif
+
+		write_buffer = (buffer & masque) >> nb_buf;
+
+		#ifdef DEBUG
+			printf("Buffer : %08x\n", buffer);
+			printf("Buffer d'écriture : %04x\n", write_buffer);
+		#endif
+
+		buffer = buffer & ~masque;
+
+		#ifdef DEBUG
+			printf("Buffer après déplacement: %08x\n", buffer);
+		#endif
+
+		fwrite(&write_buffer,sizeof(uint16_t),1,fout);
+	}
+
+	#ifdef DEBUG
+		printf("\n\n");
+	#endif
+
 }
 
 int lire_char() {
@@ -106,5 +204,38 @@ int lire_char() {
 }
 
 unsigned int lire_code(int taille) {
+	uint16_t reader_buffer = 0x0000;
+	uint32_t masque = 0xffffffff;
+	unsigned int code;
 
+
+	if (nb_buf < taille) {
+
+		fread (&reader_buffer,sizeof(uint16_t),1,fin);
+
+		buffer = (buffer << 16) | reader_buffer;
+		nb_buf = nb_buf + 16;
+
+		#ifdef DEBUG
+			printf("Buffer de lecture : %04x\n", reader_buffer);
+			printf("Buffer : %08x et nb_buf = %d\n", buffer, nb_buf);
+		#endif
+	}
+
+	nb_buf = nb_buf - taille;
+
+	masque = (~(masque << taille)) << nb_buf;
+
+	code = (buffer & masque) >> nb_buf;
+
+	buffer = buffer & ~masque;
+
+	#ifdef DEBUG
+		printf("Masque : %08x\n", masque);
+		printf("Code obtenu : %04x\n", code);
+		printf("Buffer : %08x et nb_buf = %d\n", buffer, nb_buf);
+		printf("\n");
+	#endif
+
+	return code;
 }
