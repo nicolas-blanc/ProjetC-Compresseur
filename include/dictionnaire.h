@@ -44,7 +44,7 @@ void growSize();
 dico init(dico d);
 
 ////////////////////////////////////////////////////////////////
-// Author : Quentin
+// Author : Coralie
 //
 bool isExist(char c);
 
