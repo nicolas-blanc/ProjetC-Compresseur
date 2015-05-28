@@ -110,14 +110,6 @@ void ecrire_code(uint16_t code, int taille) { // Gestion de fin de fichier -> si
 		printf("Code : %04x\n", code);
 	#endif
 
-/*	uint32_t code_temp = 0x00000000;
-	if(nb_buf == 0)
-		code_temp = code;
-	else {
-		code_temp = code << nb_buf;
-	}
-*/
-
 	buffer = (buffer << taille) | code;
 
 	nb_buf = nb_buf + taille;

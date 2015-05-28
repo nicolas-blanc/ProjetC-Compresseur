@@ -16,11 +16,20 @@ void close();
  */
 int eof();
 
+/*
+ * Ecris la chaine de caractère dans le fichier de sortie
+ */
 void ecrire_char(char * chaine);
 
+/*
+ * Ecris le code dans le fichier de sortie en fonction de la taille du code (en bits)
+ */
 void ecrire_code(uint16_t code, int taille);
 
-void vider_buffer_code();
+/*
+ * Vide le buffer en ecrivant les derniers code présent dans le buffer dans le fichier de sortie
+ */
+void vider_buffer_code(); // A modifier en mettant fin de fichier (code de fin de fichier à renseigner -> void fin_de_fichier(uint16_t code, int taille))
 
 /*
  * Retourne le caractère lu dans le fichier d'entrée, ou -1 si le pointeur dans le fichier est à la fin du fichier (End_Of_File)
