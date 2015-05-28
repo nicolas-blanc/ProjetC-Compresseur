@@ -21,21 +21,25 @@ void decode()
 	int taille;
 	unsigned int  code; //int pour gérér les codes >255
 	char * chaine = malloc( TAILLE_MAX_CHAINE * sizeof(char));
+	char * temp = malloc( TAILLE_MAX_CHAINE * sizeof(char));
 	char * entree = malloc( TAILLE_MAX_CHAINE * sizeof(char)); 
 	
 	init_dico();
-	//taille= getSize();
-	code = lire_code(); // TODO: fonction lire_code qui lit (taille) bits correspondant aux bits significatifs du code et renvoie la 		valeur en int du code
-	chaine = find_string(code); //TODO: find_string qui renvoie la chaine qui correspond au code dans le dico
+	taille= getSize();
+	code = lire_code(taille); // TODO : fonction lire_code qui renvoie la valeur en int du code
+	chaine = getCharByCode(code); 
 	
 	ecrire_char(chaine);
 	while(code != 257)
 	{	
-		//taille= getSize();
-		code = lire_code();
-		if(!isExist(code)) // TODO : fonction isExistcode qui prend un unsigned int et renvoie 1 si code existe dans D
+		taille= getSize();
+		code = lire_code(taille);
+		temp = getCharByCode(code);
+		
+		if(isExist(temp) <= 0)  
 		
 			entree = concat(chaine, chaine[0]);
+			
 		else
 			entree = find_string(code);
 			
