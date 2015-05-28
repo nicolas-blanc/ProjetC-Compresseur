@@ -11,9 +11,8 @@ char temp[2];
 temp[0]=reste;
 temp[1]="\n";
 strcat(dest, temp);
-
+return;
 }
-
 
 void decode()
 {
