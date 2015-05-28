@@ -14,7 +14,11 @@ unsigned int code;
 cell* down;
 } cell_tab;
 
+typedef struct cell* tabCode[4096]
+
 typedef tab Dico[258];
+
+
 // case 256: taille, case 257: EOF, case 258: bit clear (reset dico)
 
 ////////////////////////////////////////////////////////////////
@@ -39,8 +43,8 @@ void growSize();
 
 ////////////////////////////////////////////////////////////////
 // Author : Quentin
-//
-dico init(dico d);
+// Spe : Initialise le dictionnaire
+void init();
 
 ////////////////////////////////////////////////////////////////
 // Author : Quentin
@@ -48,4 +52,5 @@ dico init(dico d);
 bool isExist(char c);
 
 
-
+// Variable global //
+Dico* dico = init();

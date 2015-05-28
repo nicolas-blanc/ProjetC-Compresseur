@@ -20,8 +20,15 @@ void growSize(){
 }
 
 ////////////////////////////////////////////////////////////////
-int init_dico(dico d){
-
+// Author : Quentin
+void init();
+    int i = 0;
+    for(i;i<256;i++) {
+        dico[i].car = char(i);
+        dico[i].code = i;
+        dico[i].down = null;
+    }
+    dico[]
 }
 
 ////////////////////////////////////////////////////////////////
