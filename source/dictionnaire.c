@@ -4,7 +4,6 @@
 ////////////////////////////////////////////////////////////////
 int get(char * c){
 
-
 }
 
 ////////////////////////////////////////////////////////////////
@@ -38,15 +37,15 @@ int isExist(char * c){
     int i, j;
 
     /**On parcours la chaine de caractere*/
-    for (i=0, i < sizec, i++){
+    for (i=0; i < sizec; i++){
 
         /**On parcourt le tableau pour trouver le premier caracteres*/
-        for (j=0, j < 259, j++) {
+        for (j=0; j < 259; j++) {
 
             if (d[j]->car == c[i]){
-                // Si on trouve le premier caractere et que celui ci etait l'unique caractrere de la chaine on retourne le code
+                // Si on trouve le premier caractere et que celui ci etait l'unique caractere de la chaine on retourne le code
                  if (sizec == 1) {
-                     return d[j]->code ;
+                     return d[j]->code;
                  }
                  // Si on trouve le premier caractere et que le pointeur vers down est null alors la chaine ne se trouve pas dans le dictionnaire
                  else if (d[j]->down == NULL) {
@@ -65,7 +64,7 @@ int isExist(char * c){
             }
 
             /**On parcours les listes chaines pour trouver la chaine de caractere*/
-            new char * newc = strcat(c[i], c[i+1]); //on recupere la nouvelle chaine de caractere a rechercher dans la liste chainee
+            char * newc = strcat(c[i], c[i+1]); //on recupere la nouvelle chaine de caractere a rechercher dans la liste chainee
                 //Si la chaine de caractere ne correspond pas au champ car on poursuit la recherche tant que next pointe vers la suite de la liste chainee
                 while (newdico->car != (*newc) && newdico->next != NULL) {
                     newdico = newdico->next ;
