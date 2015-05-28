@@ -2,20 +2,20 @@
 
 int codage() {
 	char Cc[10] = premierCaractère();
-	char Cn;
+	char Cn[1];
 	char * concat[11];
 
 	int tailleActuelle = getSize();
 
 	while(Cc != 257) { // A modifier -> erreur
-		Cn = lectureCaractère();
-		concat = strcat(Cc,Cn);
+		Cn[0] = lectureCaractère();
+		concat = strcat(Cc,Cn[0]); // Faux, Cn est modifié
 		if(isExist(concat)) {
 			Cc = concat;
 		} else {
 			ecrireCode(Cc);
 			add(concat);
-			Cc = Cn;
+			Cc = Cn[0];
 		}
 	}
 
