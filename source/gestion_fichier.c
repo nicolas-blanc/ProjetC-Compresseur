@@ -3,14 +3,20 @@
 static File * fin;
 static File * fout;
 
-static char * nom_fin;
-static char * nom_fout;
+int init_fichier(char * nom_fin, char * nom_fout) {
+	FILE* fopen(const char* nomDuFichier, const char* modeOuverture);
 
-int init_fichier(char * nom_in, char * nom_out) {
+	char * nom_in = "../"
+	nom_in = strcat("")
 
+	fin = fopen(nom_fin,"r")
 }
 
 void close() {
+
+}
+
+int non_EOF() {
 
 }
 
