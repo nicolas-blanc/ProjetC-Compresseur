@@ -21,8 +21,8 @@ void decode()
 	unsigned int  code; //int pour gérér les codes >255
 	char * chaine = malloc( TAILLE_MAX_CHAINE * sizeof(char));
 	char * entree = malloc( TAILLE_MAX_CHAINE * sizeof(char)); 
-	dico d;
-	init_dico(d);
+	
+	init_dico();
 	taille= getSize();
 	code = lire_code(taille); // TODO: fonction lire_code qui lit (taille) bits correspondant aux bits significatifs du code et renvoie la valeur en int du code
 	chaine = find_string(code);
