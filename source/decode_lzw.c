@@ -14,6 +14,7 @@ strcat(dest, temp);
 
 }
 
+
 void decode()
 {
 	unsigned int c;
@@ -23,22 +24,22 @@ void decode()
 	char * entree = malloc( TAILLE_MAX_CHAINE * sizeof(char)); 
 	
 	init_dico();
-	taille= getSize();
-	code = lire_code(taille); // TODO: fonction lire_code qui lit (taille) bits correspondant aux bits significatifs du code et renvoie la valeur en int du code
+	//taille= getSize();
+	code = lire_code(); // TODO: fonction lire_code qui lit (taille) bits correspondant aux bits significatifs du code et renvoie la 		valeur en int du code
 	chaine = find_string(code); //TODO: find_string qui renvoie la chaine qui correspond au code dans le dico
 	
-	ecrire_caractere(chaine);
+	ecrire_char(chaine);
 	while(code != 257)
 	{	
-		taille= getSize();
-		code = lire_code(taille);
+		//taille= getSize();
+		code = lire_code();
 		if(!isExist(code)) // TODO : fonction isExistcode qui prend un unsigned int et renvoie 1 si code existe dans D
 		
 			entree = concat(chaine, chaine[0]);
 		else
 			entree = find_string(code);
 			
-		ecrire_caractere(entree);
+		ecrire_char(entree);
 		add( concat (chaine, entree[0]) );
 		chaine = entree;
 		
