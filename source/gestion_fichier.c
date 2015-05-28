@@ -1,13 +1,37 @@
 #include "gestion_fichier.h"
 
-int init_fichier(char * nom_in, char * nom_out);
+static File * fin;
+static File * fout;
 
-void close();
+static char * nom_fin;
+static char * nom_fout;
 
-void ecrire_char(char * chaine);
+int init_fichier(char * nom_in, char * nom_out) {
 
-void ecrire_code(unsigned int code);
+}
 
-char lire_char();
+void close() {
 
-unsigned int lire_code(int taille);
+}
+
+void ecrire_char(char * chaine) {
+/*	fwrite(&c,1,NB_TO_WRITE,f);
+	fflush(f);
+	return;*/
+
+}
+
+void ecrire_code(unsigned int code) {
+
+}
+
+char lire_char() {
+/*	char res;
+	res = fread(&res,1,NB_TO_READ,f);
+	return res;
+*/
+}
+
+unsigned int lire_code(int taille) {
+
+}
