@@ -1,11 +1,13 @@
 #include "../include/codage.h"
 
 int codage() {
-	char * Cc[10] = premierCaractère();
-	char Cn[10];
-	char * concat[20];
+	char Cc[10] = premierCaractère();
+	char Cn;
+	char * concat[11];
 
-	while(Cc != 257) {
+	int tailleActuelle = getSize();
+
+	while(Cc != 257) { // A modifier -> erreur
 		Cn = lectureCaractère();
 		concat = strcat(Cc,Cn);
 		if(isExist(concat)) {
@@ -20,6 +22,10 @@ int codage() {
 	ecrireCode(Cc);
 }
 
-void ecrireCode(char * chaine) {
-	//test sur taille du dictionnaire 
+void ecrireCode(char * chaine, int tailleActuelle) {
+	int taille = getSize();
+
+	if (tailleActuelle < taille) {
+		
+	}
 }
