@@ -7,7 +7,7 @@ int codage() {
 
 	int tailleActuelle = getSize();
 
-	while(Cc != 257) { // A modifier -> erreur
+	while(non_EOF()) { // A modifier -> erreur
 		Cn[0] = lectureCaractère();
 		concat = strcat(Cc,Cn[0]); // Faux, Cn est modifié
 		if(isExist(concat)) {
