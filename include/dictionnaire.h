@@ -14,6 +14,7 @@ unsigned int code;
 cell* down;
 } cell_tab;
 
+
 typedef struct cell* tabCode[4096]
 
 typedef tab Dico[258];
@@ -50,7 +51,6 @@ void init();
 // Author : Quentin
 //
 bool isExist(char c);
-
 
 // Variable global //
 Dico* dico = init();
