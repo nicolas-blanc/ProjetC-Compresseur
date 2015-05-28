@@ -55,7 +55,7 @@ void init();
 bool isExist(char c);
 
 ////////////////////////////////////////////////////////////////
-// Author : Quentin
+// Author : Coralie
 //
 void reset();
 
