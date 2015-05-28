@@ -33,9 +33,9 @@ void decode()
 	{	
 		taille= getSize();
 		code = lire_code(taille);
-		temp = getCharByCode(code);
+
 		
-		if(isExist(temp) <= 0)  
+		if(getCharByCode(code)) == NULL)  // si temp n'est pas dans le dico
 		
 			entree = concat(chaine, chaine[0]);
 			
