@@ -55,3 +55,26 @@ void decode()
 
 }
  
+int main(int argc, char* argv[]){
+
+    
+    // Lecture des arguments sur la ligne de commande
+    
+    if ( argc != 3 ){
+        fprintf(stderr,"vous n'avez pas saisi les bons arguments :\n\ex: decode_lwz sortie fichier.txt\n");
+        exit(EXIT_FAILURE);
+    }
+    
+    if(init_fichier_decompression(argv[1], argv[2]) < 0)
+    {
+        fprintf(stderr,"Erreur lors de l'ouverture de fichier \n");
+        exit(1);
+    }
+    else
+    	decodage();
+    	
+    close();	
+    	
+   return 0;
+
+}
