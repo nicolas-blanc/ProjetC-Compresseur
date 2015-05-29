@@ -1,12 +1,12 @@
+#ifndef DICTIONNAIRE_H_INCLUDED
+#define DICTIONNAIRE_H_INCLUDED
+
 #include <math.h>
 #include <string.h>
 #include <stdlib.h>
 #define TAILLE_MAX_CODE 12
 #define TAILLE_DICO 258
 #define TAILLE_HASHMAP 4096
-
-
-
 
 typedef struct cell cell;
 struct cell {
@@ -30,6 +30,11 @@ tab Dico[258];
 typedef struct cell* TabCode[TAILLE_HASHMAP];
 
 typedef cell* Dico[TAILLE_DICO];
+
+// Variable global //
+extern Dico dico;
+extern TabCode hashmap;
+extern int sizeOfDico = TAILLE_DICO;
 
 // case 256: taille, case 257: EOF, case 258: bit clear (reset dico)
 
@@ -71,8 +76,5 @@ int isExist(char* c);
 //
 void reset();
 
+#endif
 
-// Variable global //
-Dico dico;
-TabCode hashmap;
-int sizeOfDico = 258;
