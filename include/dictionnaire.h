@@ -8,15 +8,6 @@
 #define TAILLE_DICO 258
 #define TAILLE_HASHMAP 4096
 
-#endif
-
-
-
-
-
-
-
-
 typedef struct cell cell;
 struct cell {
 char* string;
@@ -85,3 +76,5 @@ void reset();
 Dico dico;
 TabCode hashmap;
 int sizeOfDico = 258;
+
+#endif
