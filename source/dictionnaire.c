@@ -3,7 +3,8 @@
 ////////////////////////////////////////////////////////////////
 // Author : Quentin
 //
-char* getCharByCode(unsigned int c){
+char* getCharByCode(unsigned int c)
+{
     return hashmap[c]->string;
 }
 
@@ -29,7 +30,7 @@ void add(char* c)
             researchString[0] = c[0];
 
             // on recupère les cell pour le parcours
-            cell* currentCell = dico[researchString[0]];
+            cell* currentCell = dico[(int)researchString[0]];
             cell* previousCell = currentCell;
 
             // On prepare notre nouvelle cell
@@ -43,7 +44,7 @@ void add(char* c)
             if (currentCell == NULL)
             {
                 // Il n'y aucune cellule, on rajoute directement la nouvelle cellule
-                dico[researchString[0]] = newCell;
+                dico[(int)researchString[0]] = newCell;
             } else {
                 // Il existe deja des cellules, on cherche le bon emplacement
                 while(currentNode < strlen(c) && insert == 0)
@@ -103,17 +104,19 @@ void add(char* c)
 
 ////////////////////////////////////////////////////////////////
 // Author : Quentin
-int getSize(){
+int getSize()
+{
     return log(sizeOfDico)/log(2);
 }
 
 ////////////////////////////////////////////////////////////////
 // Author : Quentin
-void init(){
+void init()
+{
     int i = 0;
-    for(i;i<TAILLE_DICO;i++) {
-        //dico[i].car = (i<256)?:char(i):null;
-        dico[i] = malloc(sizeof(cell));
+    for(i;i<TAILLE_DICO;i++)
+    {
+        dico[i] = malloc(sizeof(cell*));
     }
 }
 
@@ -155,28 +158,29 @@ int isExist(char* c){
 
             /**On parcours les listes chaines pour trouver la chaine de caractere*/
             newc = strcat(newc, &c[i+1]); //on recupere la nouvelle chaine de caractere a rechercher dans la liste chainee
-                //Si la chaine de caractere ne correspond pas au champ car on poursuit la recherche tant que next pointe vers la suite de la liste chainee
-                while (newdico->string != (*newc) && newdico->next != NULL) {
-                    newdico = newdico->next ;
-                }
-                //Si la chaine de caractere ne correspond pas au champ car et que le champ next point vers NULL alors la chaine de caractere n'est pas presente dans le dictionnaire
-                if( newdico->string != (*newc) && newdico->next == NULL) {
-                    return -1;
-                }
-                //Si la chaine de caractere correspond au champ car et que sa longueur est egale a la longueur de la chaine initialement recherche on renvoie le code correspondant
-                else if (newdico->string == (*newc) && strlen(newc)==sizec) {
-                    return newdico->code;
-                }
-                //Si la chaine de caractere correspond au champ car et que le champ down pointe vers la suite de la liste chainee on poursuit la recherche
-                else if (newdico->string == (*newc) && newdico->down != NULL) {
-                    newdico = newdico->down;
-                    continue; //on passe a l'itŽration suivante
-                }
-                //Si la chaine de caractere ne correspond pas au champ car et que le champ down point vers NULL alors la chaine de caractere n'est pas presente dans le dictionnaire
-                else {
-                    return -1;
-                }
+            //Si la chaine de caractere ne correspond pas au champ car on poursuit la recherche tant que next pointe vers la suite de la liste chainee
+            while (!(strcmp(newdico->string,newc) == 0) && newdico->next != NULL) {
+                newdico = newdico->next ;
+            }
+            //Si la chaine de caractere ne correspond pas au champ car et que le champ next point vers NULL alors la chaine de caractere n'est pas presente dans le dictionnaire
+            if(!(strcmp(newdico->string,newc) == 0) && newdico->next == NULL) {
+                return -1;
+            }
+            //Si la chaine de caractere correspond au champ car et que sa longueur est egale a la longueur de la chaine initialement recherche on renvoie le code correspondant
+            else if ((strcmp(newdico->string,newc) == 0) && strlen(newc)==sizec) {
+                return newdico->code;
+            }
+            //Si la chaine de caractere correspond au champ car et que le champ down pointe vers la suite de la liste chainee on poursuit la recherche
+            else if ((strcmp(newdico->string,newc) == 0) && newdico->down != NULL) {
+                newdico = newdico->down;
+                continue; //on passe a l'itŽration suivante
+            }
+            //Si la chaine de caractere ne correspond pas au champ car et que le champ down point vers NULL alors la chaine de caractere n'est pas presente dans le dictionnaire
+            else {
+                return -1;
+            }
         }
+        return -1;
     }
 }
 
