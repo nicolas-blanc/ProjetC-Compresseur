@@ -1,30 +1,36 @@
-#include ../include/dictionnaire.h
+#include "../include/dictionnaire.h"
 
 ////////////////////////////////////////////////////////////////
 // Author : Quentin
 //
-char* getCharByCode(unsigned int c){
-    return hashmap[c].string;
+char* getCharByCode(unsigned int c)
+{
+    return hashmap[c]->string;
 }
 
 ////////////////////////////////////////////////////////////////
 // Author : Quentin
 //
-unsigned int getCodeByChar(char* c){
+unsigned int getCodeByChar(char* c)
+{
     return isExist(c);
 }
 
 
 ////////////////////////////////////////////////////////////////
-void add(char* c){
-    if (c != null){
-        if(isExist(c)<0){
+void add(char* c)
+{
+    if (c != NULL)
+    {
+        if(isExist(c)<0)
+        {
             int currentNode = 1;
+            int insert = 0;
             char* researchString = malloc(sizeof(c));
-            researchString = c[0];
+            researchString[0] = c[0];
 
             // on recupère les cell pour le parcours
-            cell* currentCell = dico[researchString];
+            cell* currentCell = dico[researchString[0]];
             cell* previousCell = currentCell;
 
             // On prepare notre nouvelle cell
@@ -32,34 +38,56 @@ void add(char* c){
             newCell->string = c;
             newCell->code = sizeOfDico;
             sizeOfDico++;
-            newCell->next = null;
-            newCell->down = null;
+            newCell->next = NULL;
+            newCell->down = NULL;
 
-            if (currentCell == null) {
+            if (currentCell == NULL)
+            {
                 // Il n'y aucune cellule, on rajoute directement la nouvelle cellule
-                dico[researchString] = newCell;
+                dico[researchString[0]] = newCell;
             } else {
                 // Il existe deja des cellules, on cherche le bon emplacement
-                while(currentNode < strlen(c)) {
-                    strcat (researchString, c[currentNode]);
+                while(currentNode < strlen(c) && insert == 0)
+                {
+                    strcat(researchString, &c[currentNode]);
                     currentNode++;
-                    while(strcmp(researchString,currentCell->String)>0 && currentCell != null) {
+                    while(strcmp(researchString,currentCell->string)>0 && currentCell != NULL)
+                    {
                         previousCell = currentCell;
                         currentCell = currentCell->next;
                     }
-                    if (currentCell == null) {
-                        // On a trouve l'endroit ou inserer la cell. Il nous faut determiner si on l'insert en next ou en down
-                        if(strlen(c)>currentNode) {
-                            // On insert en down
-                            previousCell->down = newCell;
+                    if (currentCell == NULL)
+                    {
+                        // On a trouve l'endroit ou inserer la cell, on insert forcement en next
+                        if(strlen(c)>currentNode)
+                        {
+                            // L'insertion est impossible -> probleme dans l'execution
+                            return;
                         } else {
                             // On insert en next
                             previousCell->next = newCell;
+                            insert++;
                         }
                     } else {
                         // On verifie si la cellule courante correspond à researchString
                         // Si c'est le cas on fait un down et on recherche plus bas
                         // Sinon, on doit faire une insertion.
+                        if(strcmp(currentCell->string,researchString) == 0) {
+                            // On recherche plus bas
+                            if(currentCell->down == NULL) {
+                                // Il n'existe pas de cell en bas, on fait donc l'insertion
+                                currentCell->down = newCell;
+                            } else  {
+                                // Il existe des cell en bas, on recommence une recherche
+                                currentCell = currentCell->down;
+                            }
+
+                        } else {
+                            // On fait une insertion de la nouvelle cell dans la liste
+                            newCell->next = currentCell;
+                            previousCell->next = newCell;
+                            insert++;
+                        }
 
                     }
                 }
@@ -77,22 +105,21 @@ void add(char* c){
 ////////////////////////////////////////////////////////////////
 // Author : Quentin
 int getSize(){
-    return log(sizeOfDico)/log(2)
+    return log(sizeOfDico)/log(2);
 }
 
 ////////////////////////////////////////////////////////////////
 // Author : Quentin
-void init();
-    dico = malloc(sizeof(dico));
+void init(){
     int i = 0;
-    for(i;i<259;i++) {
+    for(i;i<TAILLE_DICO;i++) {
         //dico[i].car = (i<256)?:char(i):null;
         dico[i] = malloc(sizeof(cell));
     }
 }
 
 ////////////////////////////////////////////////////////////////
-int isExist(char * c){
+int isExist(char* c){
     int sizec = strlen(c); //convertion automatique de size_t en int
     int i, j;
 
