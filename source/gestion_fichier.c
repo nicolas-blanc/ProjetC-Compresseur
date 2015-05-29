@@ -196,7 +196,7 @@ int lire_char() {
 	return car;
 }
 
-unsigned int lire_code(int taille) {
+unsigned int lire_code(int taille) { // Rajout modification de fdf
 	uint16_t reader_buffer = 0x0000;
 	uint32_t masque = 0xffffffff;
 	unsigned int code;
