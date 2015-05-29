@@ -54,7 +54,7 @@ void code(){
 	sprintf(temp, "%c",c);
 	strcpy(chaine,temp);
 	
-	while(!eof())
+	while(eof()< 0)
 	{
 		c = lire_char();
 		strcpy(temp,chaine);
