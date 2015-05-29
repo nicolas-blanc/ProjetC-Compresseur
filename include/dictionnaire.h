@@ -5,9 +5,17 @@
 #include <string.h>
 #include <stdlib.h>
 #define TAILLE_MAX_CODE 12
+
+#define TAILLE_MAX_CHAINE 12
+
 #define TAILLE_DICO 258
 #define TAILLE_HASHMAP 4096
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> a458ce746eacb3ede08e7e373a7b0264f2da1e67
 typedef struct cell cell;
 struct cell {
 char* string;
