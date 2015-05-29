@@ -52,6 +52,9 @@ void decode()
 			strcpy(chaine,entree);
 		}
 	}
+	free(chaine);
+	free(entree);
+	free(temp);
 
 }
  
