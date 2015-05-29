@@ -154,6 +154,10 @@ void fin_de_fichier(uint16_t code, int taille) {
 	uint32_t masque;
 	int dep;
 
+	buffer = (buffer << taille) | code;
+
+	nb_buf = nb_buf + taille;
+
 	while(nb_buf > 0) {
 		if (nb_buf >= 16) { nb_buf = nb_buf - 16; dep = 0; } else { dep = 16 - nb_buf; nb_buf = 0; }
 
@@ -186,12 +190,13 @@ void fin_de_fichier(uint16_t code, int taille) {
 }
 
 int lire_char() {
-	int car = fgetc(fin);
+	int car = 0;
+	if (!(fdf)) {
+		car = fgetc(fin);
+		
+		if(car == EOF) { fdf = 0; car = -1; }
 	
-	if(car == EOF) {
-		fdf = 0;
-		car = -1;
-	}
+	} else { car = -1; }
 
 	return car;
 }
@@ -200,7 +205,6 @@ unsigned int lire_code(int taille) { // Rajout modification de fdf
 	uint16_t reader_buffer = 0x0000;
 	uint32_t masque = 0xffffffff;
 	unsigned int code;
-
 
 	if (nb_buf < taille) {
 
@@ -213,6 +217,14 @@ unsigned int lire_code(int taille) { // Rajout modification de fdf
 			printf("Buffer de lecture : %04x\n", reader_buffer);
 			printf("Buffer : %08x et nb_buf = %d\n", buffer, nb_buf);
 		#endif
+
+		if (feof(fin)) {
+			fdf = 0;
+			#ifdef DEBUG
+				printf("Arrive en fin du fichier, fdf = %d\n", fdf);
+			#endif
+		}
+
 	}
 
 	nb_buf = nb_buf - taille;
