@@ -71,6 +71,7 @@ void code(){
 			sprintf(chaine, "%c",c);
 		
 		} 
+		
 	
 	}
 	taille = getSize();
@@ -78,7 +79,10 @@ void code(){
 	ecrire_code(code,taille);
 	code = 257; 
 	fin_de_fichier(code,taille);
-
+	free(chaine);
+	free(entree);
+	free(temp);
+	
 
 }
 
