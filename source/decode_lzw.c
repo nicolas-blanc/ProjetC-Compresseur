@@ -1,4 +1,5 @@
-#include "dictionnaire.h"
+#include "../include/dictionnaire.h"
+#include "../include/gestion_fichier.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -10,23 +11,23 @@ void concat( char * dest, char reste)
 
 char temp[2];
 temp[0]=reste;
-temp[1]="\n";
+temp[1]='\n';
 strcat(dest, temp);
-return;
+
 }
 
 void decode()
 {
 	unsigned int c;
 	int taille;
-	unsigned int  code; //int pour gérér les codes >255
+	uint16_t code; //int pour gérér les codes >255
 	char * chaine = malloc( TAILLE_MAX_CHAINE * sizeof(char));
-	//char * temp = malloc( TAILLE_MAX_CHAINE * sizeof(char));
 	char * entree = malloc( TAILLE_MAX_CHAINE * sizeof(char)); 
+	char * temp = malloc( TAILLE_MAX_CHAINE * sizeof(char));
 	
-	init_dico();
+	init();
 	taille= getSize();
-	code = lire_code(taille); // TODO : fonction lire_code qui renvoie la valeur en int du code
+	code = lire_code(taille); // TODO : lire_code : ok
 	chaine = getCharByCode(code); 
 	
 	ecrire_char(chaine);
@@ -35,22 +36,22 @@ void decode()
 		taille= getSize();
 		code = lire_code(taille);
 
-		if(code != 257)
+		if(code != 257) //pour pas écrire le EOF
 		{
-			if(getCharByCode(code)) == NULL)  // si temp n'est pas dans le dico
-		
-				entree = concat(chaine, chaine[0]);
-			
+			if(getCharByCode(code) == NULL)  {// si temp n'est pas dans le dico
+				strcpy(temp,chaine);
+				concat(temp, chaine[0]);
+				strcpy(entree,temp);
+			}
 			else
-				entree = find_string(code);
+				entree = getCharByCode(code);
 			
 			ecrire_char(entree);
-			add( concat (chaine, entree[0]) );
-			chaine = entree;
+			concat (chaine, entree[0]);
+			add(chaine);
+			strcpy(chaine,entree);
 		}
 	}
-
-return;
 
 }
  
