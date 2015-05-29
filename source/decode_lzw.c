@@ -21,7 +21,7 @@ void decode()
 	int taille;
 	unsigned int  code; //int pour gérér les codes >255
 	char * chaine = malloc( TAILLE_MAX_CHAINE * sizeof(char));
-	char * temp = malloc( TAILLE_MAX_CHAINE * sizeof(char));
+	//char * temp = malloc( TAILLE_MAX_CHAINE * sizeof(char));
 	char * entree = malloc( TAILLE_MAX_CHAINE * sizeof(char)); 
 	
 	init_dico();
@@ -35,18 +35,19 @@ void decode()
 		taille= getSize();
 		code = lire_code(taille);
 
+		if(code != 257)
+		{
+			if(getCharByCode(code)) == NULL)  // si temp n'est pas dans le dico
 		
-		if(getCharByCode(code)) == NULL)  // si temp n'est pas dans le dico
-		
-			entree = concat(chaine, chaine[0]);
+				entree = concat(chaine, chaine[0]);
 			
-		else
-			entree = find_string(code);
+			else
+				entree = find_string(code);
 			
-		ecrire_char(entree);
-		add( concat (chaine, entree[0]) );
-		chaine = entree;
-		
+			ecrire_char(entree);
+			add( concat (chaine, entree[0]) );
+			chaine = entree;
+		}
 	}
 
 return;

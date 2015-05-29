@@ -7,6 +7,7 @@
 
 
 
+
 typedef struct cell cell;
 struct cell {
 char* string;
@@ -15,16 +16,20 @@ cell* next;
 cell* down;
 };
 
+
 /*
 typedef struct tab {
 cell* down;
+} tab;
+
+tab Dico[258];
 } cell_tab;
 */
+
 
 typedef struct cell* TabCode[TAILLE_HASHMAP];
 
 typedef cell* Dico[TAILLE_DICO];
-
 
 // case 256: taille, case 257: EOF, case 258: bit clear (reset dico)
 
@@ -48,20 +53,24 @@ void add(char* c);
 //
 int getSize();
 
+
 ////////////////////////////////////////////////////////////////
 // Author : Quentin
 // Spe : Initialise le dictionnaire
 void init();
 
-////////////////////////////////////////////////////////////////
-// Author : Quentin
-//
-int isExist(char* c);
 
 ////////////////////////////////////////////////////////////////
 // Author : Coralie
 //
+int isExist(char* c);
+
+
+////////////////////////////////////////////////////////////////
+// Author : Quentin
+//
 void reset();
+
 
 // Variable global //
 Dico dico;
