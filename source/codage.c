@@ -1,4 +1,4 @@
-#include "../include/codage.h"
+#include "codage.h"
 
 int codage() {
 	char Cc[10] = premierCaractère();

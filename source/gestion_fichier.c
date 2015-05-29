@@ -1,4 +1,4 @@
-#include "../include/gestion_fichier.h"
+#include "gestion_fichier.h"
 
 #define MAX_BUFFER 32
 

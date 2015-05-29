@@ -1,4 +1,4 @@
-#include "../include/dictionnaire.h"
+#include "dictionnaire.h"
 
 ////////////////////////////////////////////////////////////////
 // Author : Quentin

@@ -1,5 +1,5 @@
-#include "../include/dictionnaire.h"
-#include "../include/gestion_fichier.h"
+#include "dictionnaire.h"
+#include "gestion_fichier.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -59,7 +59,7 @@ void code(){
 		c = lire_char();
 		strcpy(temp,chaine);
 		concat(temp, c);
-		if(isExist(temp) >= 0)
+		if (isExist(temp) >= 0)
 			chaine = temp;
 		else
 		{
@@ -103,7 +103,7 @@ int main(int argc, char* argv[]){
         exit(1);
     }
     else
-    	codage();
+    	code();
     	
     close();	
    return 0;
