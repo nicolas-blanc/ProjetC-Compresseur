@@ -1,9 +1,18 @@
+#ifndef DEF_DICO // Si la constante n'a pas été définie le fichier n'a jamais été inclus
+#define DEF_DICO // On définit la constante pour que la prochaine fois le fichier ne soit pas inclus
+
 #include <math.h>
 #include <string.h>
 #include <stdlib.h>
 #define TAILLE_MAX_CODE 12
 #define TAILLE_DICO 258
 #define TAILLE_HASHMAP 4096
+
+#endif
+
+
+
+
 
 
 
