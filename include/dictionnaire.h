@@ -1,7 +1,7 @@
-#include <cmath>
+#include <math.h>
 #include <string.h>
 #define TAILLE_MAX_CODE 12
-
+#define TAILLE_MAX_CHAINE 12
 
 
 typedef struct cell {
