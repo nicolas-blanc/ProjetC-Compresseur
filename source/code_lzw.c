@@ -83,4 +83,29 @@ void code(){
 }
 
 
+int main(int argc, char* argv[]){
+
+    
+    // Lecture des arguments sur la ligne de commande
+    
+    if ( argc != 3 ){
+        fprintf(stderr,"vous n'avaez pas saisi les bons arguments :\n\tex: code_lwz fichier.txt sortie\n");
+        exit(EXIT_FAILURE);
+    }
+    
+    if(init_fichier_compression(argv[1], argv[2]) < 0)
+    {
+        fprintf(stderr,"Erreur lors de l'ouverture de fichier \n");
+        exit(1);
+    }
+    else
+    	codage();
+    	
+    close();	
+   return 0;
+
+}
+    
+
+
 
