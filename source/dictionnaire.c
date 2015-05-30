@@ -1,5 +1,6 @@
 #include "../include/dictionnaire.h"
 #define _DEBUG 0
+#include <stdio.h>
 
 int sizeOfDico = TAILLE_DICO;
 
@@ -69,7 +70,9 @@ void add(char* c)
                     currentNode++;
                     if(_DEBUG == 1)
                     {
-                        printf("currentCell : "); printf(currentCell);printf("\n");
+                        printf("currentCell : "); 
+                       // printf(currentCell);
+                        printf("\n");
                     }
                     while(currentCell->next != NULL && strcmp(researchString,currentCell->string)>0)
                     {
