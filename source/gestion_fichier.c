@@ -118,7 +118,7 @@ void ecrire_code(uint16_t code, int taille) { // Gestion de fin de fichier -> si
 		printf("Buffer : %08x et nb_buf = %d\n", buffer, nb_buf);
 	#endif
 
-	int i;
+	//int i;
 	while (nb_buf >= 16) {
 		nb_buf = nb_buf - 16;
 
