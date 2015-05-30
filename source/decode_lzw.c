@@ -18,7 +18,7 @@ strcat(dest, temp);
 
 void decode()
 {
-	unsigned int c;
+	
 	int taille;
 	uint16_t code; //int pour gérér les codes >255
 	char * chaine = malloc( TAILLE_MAX_CHAINE * sizeof(char));
@@ -74,7 +74,7 @@ int main(int argc, char* argv[]){
         exit(1);
     }
     else
-    	decodage();
+    	decode();
     	
     close();	
     	
