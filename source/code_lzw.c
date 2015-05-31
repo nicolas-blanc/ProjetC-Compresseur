@@ -1,5 +1,5 @@
-#include "../include/dictionnaire.h"
-#include "../include/gestion_fichier.h"
+#include "dictionnaire.h"
+#include "gestion_fichier.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -54,12 +54,12 @@ void code(){
 	sprintf(temp, "%c",c);
 	strcpy(chaine,temp);
 	
-	while(!eof())
+	while(eof()< 0)
 	{
 		c = lire_char();
 		strcpy(temp,chaine);
 		concat(temp, c);
-		if(isExist(temp) >= 0)
+		if (isExist(temp) >= 0)
 			chaine = temp;
 		else
 		{
@@ -71,6 +71,7 @@ void code(){
 			sprintf(chaine, "%c",c);
 		
 		} 
+		
 	
 	}
 	taille = getSize();
@@ -78,7 +79,10 @@ void code(){
 	ecrire_code(code,taille);
 	code = 257; 
 	fin_de_fichier(code,taille);
-
+	free(chaine);
+	free(entree);
+	free(temp);
+	
 
 }
 
@@ -99,7 +103,7 @@ int main(int argc, char* argv[]){
         exit(1);
     }
     else
-    	codage();
+    	code();
     	
     close();	
    return 0;

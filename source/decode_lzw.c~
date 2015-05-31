@@ -1,5 +1,5 @@
-#include "dictionnaire.h"
-#include "gestion_fichier.h"
+#include "../include/dictionnaire.h"
+#include "../include/gestion_fichier.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -18,7 +18,7 @@ strcat(dest, temp);
 
 void decode()
 {
-	
+	unsigned int c;
 	int taille;
 	uint16_t code; //int pour gérér les codes >255
 	char * chaine = malloc( TAILLE_MAX_CHAINE * sizeof(char));
@@ -74,7 +74,7 @@ int main(int argc, char* argv[]){
         exit(1);
     }
     else
-    	decode();
+    	decodage();
     	
     close();	
     	
