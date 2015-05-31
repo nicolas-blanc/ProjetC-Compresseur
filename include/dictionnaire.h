@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-#ifndef DEF_DICO // Si la constante n'a pas été définie le fichier n'a jamais été inclus
-#define DEF_DICO // On définit la constante pour que la prochaine fois le fichier ne soit pas inclus
-=======
-#ifndef __DICTIONNAIRE_H_INCLUDED
-#define __DICTIONNAIRE_H_INCLUDED
->>>>>>> e3eca8987b29ba3fb8f3b8f0df2e9b0129393cab
+#ifndef DEF_DICOH // Si la constante n'a pas été définie le fichier n'a jamais été inclus
+#define DEF_DICOH // On définit la constante pour que la prochaine fois le fichier ne soit pas inclus
 
 #include <math.h>
 #include <string.h>
@@ -15,14 +10,7 @@
 #define TAILLE_DICO 258
 #define TAILLE_HASHMAP 4096
 
-<<<<<<< HEAD
-=======
 
-<<<<<<< HEAD
-
->>>>>>> a458ce746eacb3ede08e7e373a7b0264f2da1e67
-=======
->>>>>>> e3eca8987b29ba3fb8f3b8f0df2e9b0129393cab
 typedef struct cell cell;
 struct cell {
 char* string;
@@ -92,13 +80,3 @@ int isExist(char* c);
 void reset();
 
 #endif
-
-<<<<<<< HEAD
-// Variable global //
-Dico dico;
-TabCode hashmap;
-int sizeOfDico = 258;
-
-#endif
-=======
->>>>>>> e3eca8987b29ba3fb8f3b8f0df2e9b0129393cab
