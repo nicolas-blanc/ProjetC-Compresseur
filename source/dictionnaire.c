@@ -147,9 +147,13 @@ int isExist(char* c){
                      break ; // on sort de la boucle for(j=0, j < 259, j++)
                  }
             }
+            else if (j != c[i]){
+                //Si le premier caractere ne correspond pas, on poursuit le parcours du tableau
+                continue ;
+            }
 
             /** Si on n'a pas trouve le premier caractere dans le tableau de 259 elements, alors la chaine ne se trouve pas dans le dictionnaire */
-            if (j == TAILLE_DICO && j != c[i]) {
+            else if (j == TAILLE_DICO && j != c[i]) {
             return -1;
             }
 
