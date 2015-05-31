@@ -172,6 +172,13 @@ void add(char* c) {
         newCell->next = NULL;
         newCell->down = NULL;
 
+        if(_DEBUG == 1){
+            printf("longueur : %i \n", sizec);
+            if (dico[0] == NULL) {
+                printf("initialisation correct \n");
+            }
+        }
+
         for (i=0; i < sizec; i++){
 
             /**On parcourt le tableau pour trouver le premier caracteres*/
@@ -192,7 +199,7 @@ void add(char* c) {
                         return;
                      }
                      // Si le pointeur n'est pas null et sizec > 2 : on poursuit la recherche dans la liste chainee
-                     else if (dico[j] != NULL && sizec > 2){
+                     else if (dico[j] != NULL && sizec >= 2){
                         currentCell = dico[j]; //on recupere un pointeur vers la bonne liste chainee
                         break ; // on sort de la boucle for(j=0, j < 259, j++)
                      }
