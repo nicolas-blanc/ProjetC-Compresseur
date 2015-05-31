@@ -156,97 +156,110 @@ void add(char* c)
 // on ne peut ajouter une chaines de longueur n uniquement si le debut de chaine de longueur n-1 est deja dans le dictionnaire
 
 void add(char* c) {
-    int sizec = strlen(c); //permet de recuperer la taille de la chaine
-    int i, j;
-    cell* currentCell = malloc(sizeof(cell)); // pointeur vers une cellule
-    char* newc = malloc(sizeof(char)*sizec); // chaine de caractere formee peu a peu a partir de c
-    newc[0] = c[0];
 
-    // On prepare notre nouvelle cell pour l'ajout dans le dictionnaire
-    cell* newCell = malloc(sizeof(cell));
-    newCell->string = c;
-    newCell->code = sizeOfDico;
-    newCell->next = NULL;
-    newCell->down = NULL;
+    if (c != NULL) {
 
-    for (i=0; i < sizec; i++){
+        int sizec = strlen(c); //permet de recuperer la taille de la chaine
+        int i, j;
+        cell* currentCell = malloc(sizeof(cell)); // pointeur vers une cellule
+        char* newc = malloc(sizeof(char)*sizec); // chaine de caractere formee peu a peu a partir de c
+        newc[0] = c[0];
 
-        /**On parcourt le tableau pour trouver le premier caracteres*/
-        for (j=0; j < TAILLE_DICO; j++) {
+        // On prepare notre nouvelle cell pour l'ajout dans le dictionnaire
+        cell* newCell = malloc(sizeof(cell));
+        newCell->string = c;
+        newCell->code = sizeOfDico;
+        newCell->next = NULL;
+        newCell->down = NULL;
 
-            // Si le premier caractere correspond a une case du tableau
-            if (j == c[i]){
-                // Si le caractere est l'unique caractere de la chaine : le caractere appartient deja au dictionnaire
-                 if (sizec == 1) {
-                    printf("ERREUR : le caractere appartient deja au dictionnaire\n");
-                 }
-                 // Si le pointeur est null et sizec==2 : on fait pointer la case vers une nouvelle cellule contenant le caractere
-                 else if (dico[j] == NULL && sizec == 2) {
-                     /** On dans la case du dictionnaire */
-                    dico[j] = newCell;
-                    sizeOfDico++;
-                 }
-                 // Si le pointeur n'est pas null et sizec > 2 : on poursuit la recherche dans la liste chainee
-                 else if (dico[j] != NULL && sizec > 2){
-                    currentCell = dico[j]; //on recupere un pointeur vers la bonne liste chainee
-                    break ; // on sort de la boucle for(j=0, j < 259, j++)
-                 }
-                 // Dans les autres cas : le caractere ne peut pas etre ajoute car le debut de cette chaine n'appartient pas au dictionnaire ou alors cette chaine appartient deja au dictionnaire
-                 else {
-                    printf("ERREUR : la chaine de caractere ne peut etre ajoute car elle y appartient deja ou alors le debut de cette chaine n'appartient pas au dictionnaire\n");
-                 }
+        for (i=0; i < sizec; i++){
+
+            /**On parcourt le tableau pour trouver le premier caracteres*/
+            for (j=0; j < TAILLE_DICO; j++) {
+
+                // Si le premier caractere correspond a une case du tableau
+                if (j == c[i]){
+                    // Si le caractere est l'unique caractere de la chaine : le caractere appartient deja au dictionnaire
+                     if (sizec == 1) {
+                        printf("ERREUR : le caractere appartient deja au dictionnaire\n");
+                        return;
+                     }
+                     // Si le pointeur est null et sizec==2 : on fait pointer la case vers une nouvelle cellule contenant le caractere
+                     else if (dico[j] == NULL && sizec == 2) {
+                         /** On dans la case du dictionnaire */
+                        dico[j] = newCell;
+                        sizeOfDico++;
+                        return;
+                     }
+                     // Si le pointeur n'est pas null et sizec > 2 : on poursuit la recherche dans la liste chainee
+                     else if (dico[j] != NULL && sizec > 2){
+                        currentCell = dico[j]; //on recupere un pointeur vers la bonne liste chainee
+                        break ; // on sort de la boucle for(j=0, j < 259, j++)
+                     }
+                     // Dans les autres cas : le caractere ne peut pas etre ajoute car le debut de cette chaine n'appartient pas au dictionnaire ou alors cette chaine appartient deja au dictionnaire
+                     else {
+                        printf("ERREUR : la chaine de caractere ne peut etre ajoute car elle y appartient deja ou alors le debut de cette chaine n'appartient pas au dictionnaire\n");
+                        return;
+                     }
+                }
+
+                // Si on n'a pas trouve le premier caractere dans le tableau de 259 elements, on ne peut pas l'ajouter
+                else if (j != c[i] && j == TAILLE_DICO ) {
+                    printf("ERREUR : on n'a pas trouve le premier caractere dans le tableau de 259 elements : la chaine ne peut pas etre ajoute\n");
+                    return;
+                }
+
+                //Si le premier caractere ne correspond pas a la case courante du tableau <259, on poursuit le parcours du tableau en passant a l'iteration suivante
+                else if (j != c[i]){
+                    continue ;
+                }
+
             }
 
-            // Si on n'a pas trouve le premier caractere dans le tableau de 259 elements, on ne peut pas l'ajouter
-            else if (j != c[i] && j == TAILLE_DICO ) {
-                printf("ERREUR : on n'a pas trouve le premier caractere dans le tableau de 259 elements : la chaine ne peut pas etre ajoute\n");
+
+            /**On parcours les listes chaines pour trouver la chaine de caractere (apres parcours du tableau)*/
+            newc = strcat(newc, &c[i+1]); //on recupere la nouvelle chaine de caractere a rechercher dans la liste chainee
+
+            //Si la chaine de caractere ne correspond pas au champ string on poursuit la recherche tant que next pointe vers la suite de la liste chainee
+            while (!(strcmp(currentCell->string,newc) == 0) && currentCell->next != NULL) {
+                currentCell = currentCell->next;
             }
-
-            //Si le premier caractere ne correspond pas a la case courante du tableau <259, on poursuit le parcours du tableau en passant a l'iteration suivante
-            else if (j != c[i]){
-                continue ;
+            //Si la chaine de caractere ne correspond pas au champ string et que le champ next point vers NULL : on ajoute la chaine de caractere en next
+            if(!(strcmp(currentCell->string,newc) == 0) && currentCell->next == NULL) {
+                /** On insert en next */
+                currentCell->next = newCell;
+                sizeOfDico++;
+                return;
             }
-
-        }
-
-
-        /**On parcours les listes chaines pour trouver la chaine de caractere (apres parcours du tableau)*/
-        newc = strcat(newc, &c[i+1]); //on recupere la nouvelle chaine de caractere a rechercher dans la liste chainee
-
-        //Si la chaine de caractere ne correspond pas au champ string on poursuit la recherche tant que next pointe vers la suite de la liste chainee
-        while (!(strcmp(currentCell->string,newc) == 0) && currentCell->next != NULL) {
-            currentCell = currentCell->next;
-        }
-        //Si la chaine de caractere ne correspond pas au champ string et que le champ next point vers NULL : on ajoute la chaine de caractere en next
-        if(!(strcmp(currentCell->string,newc) == 0) && currentCell->next == NULL) {
-            /** On insert en next */
-            currentCell->next = newCell;
-            sizeOfDico++;
-        }
-        //Si la chaine de caractere correspond au champ string et que sa longueur est egale a la longueur de la chaine initialement : la chaine appartient deja au dictionnaire
-        else if ((strcmp(currentCell->string,newc) == 0) && strlen(newc)==sizec) {
-            printf("ERREUR : la chaine de caractere appartient deja au dictionnaire\n");
-        }
-        //Si la chaine de caractere correspond au champ string et que le champ down pointe vers la suite de la liste chainee on poursuit la recherche
-        else if ((strcmp(currentCell->string,newc) == 0) && currentCell->down != NULL) {
-            currentCell = currentCell->down;
-            continue; //on passe a l'itŽration suivante
-        }
-        //Si la chaine de caractere correspond au champ string, que le champ down pointe vers NULL et que c a un caractere de plus que newc : on ajoute la chaine de caractere en down
-        else if ((strcmp(currentCell->string,newc) == 0) && currentCell->down == NULL && (sizec - strlen(newc)) == 1) {
-            /** On insert en down */
-            currentCell->down = newCell;
-            printf("J'ai insert %s dans le down de %s\n",c,currentCell->string);
-            sizeOfDico++;
-        }
-        //Sinon on ne peut ajouter le caractere
-        else  {
-            printf("ERREUR : la chaine de caractere ne peut pas etre ajoute car le debut de cette chaine n'appartient pas au dictionnaire\n");
+            //Si la chaine de caractere correspond au champ string et que sa longueur est egale a la longueur de la chaine initialement : la chaine appartient deja au dictionnaire
+            else if ((strcmp(currentCell->string,newc) == 0) && strlen(newc)==sizec) {
+                printf("ERREUR : la chaine de caractere appartient deja au dictionnaire\n");
+                return;
+            }
+            //Si la chaine de caractere correspond au champ string et que le champ down pointe vers la suite de la liste chainee on poursuit la recherche
+            else if ((strcmp(currentCell->string,newc) == 0) && currentCell->down != NULL) {
+                currentCell = currentCell->down;
+                continue; //on passe a l'itŽration suivante
+            }
+            //Si la chaine de caractere correspond au champ string, que le champ down pointe vers NULL et que c a un caractere de plus que newc : on ajoute la chaine de caractere en down
+            else if ((strcmp(currentCell->string,newc) == 0) && currentCell->down == NULL /*&& (sizec - strlen(newc)) == 1*/) {
+                /** On insert en down */
+                currentCell->down = newCell;
+                sizeOfDico++;
+                return;
+            }
+            //Sinon on ne peut ajouter le caractere
+            else  {
+                printf("ERREUR : la chaine de caractere ne peut pas etre ajoute car le debut de cette chaine n'appartient pas au dictionnaire\n");
+                return;
+            }
         }
     }
+    else {
+        printf("ERREUR : l'argument est nul \n");
+        return;
+    }
 }
-
-
 
 
 
