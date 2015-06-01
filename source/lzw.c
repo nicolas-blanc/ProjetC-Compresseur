@@ -10,7 +10,7 @@ int main(int argc, char const *argv[])
 		printf("Logiciel de compression et decompression de fichier contenant essentiellement des caractères ASCII avec la methode LZW\nCe programme prend trois arguments :\n");
 		printf("\t- 'c' ou 'd' : En fonction de ce que dois faire le programme :\n\t\t'c' : Indique au programme de compresser le premier fichier dans le deuxieme fichier\n\t\t'd' : Indique au programme de decompresser le premier fichier dans le deuxieme fichier\n");
 		printf("\t- Premier fichier : Entree le nom du fichier. C'est sur celui-ci que s'appliquera la fonction. (Mettre l'extension si le fichier est a compresser, sinon seulement le nom de l'archive a decompresser\n");
-		printf("\t- Deuxieme fichier : Entree le nom du fichier. C'est le fichier final que rend la fonction. Attention, si le fichier existe, il sera ecrase. (Mettre l'extension pour la decompression, sinon seulement le nom de l'archive)\n");
+		printf("\t- Deuxieme fichier : Entree le nom du fichier. C'est le fichier final que rend la fonction. Attention, si le fichier existe, il sera ecrase. (Mettre l'extension dans les deux cas)\n");
 	} else {
 		//if ( access(argv[2], 0) )
 			if ( argv[1][0] == 'c' ) {
