@@ -4,25 +4,25 @@
 #include <string.h>
 #include <stdlib.h>
  /*==============ALGO =======================
- 
+
   initialize table: 0 to 255 = code for individual bytes
-  
+
   string= get input symbols
-  
+
   while theree are still input symbols
-  
-	symbol= get input symbol  
-	
+
+	symbol= get input symbol
+
 	if STRING + SYMBOL is in TABLE:
-	
+
 		STRING = STRING + SYMBOL
-		
+
 	else:
-	
+
 		output the code for STRING
 		add STRING + SYMBOL to TABLE
 		STRING = SYMBOL
-		
+
   output the code for STRING
 
 //==========================================*/
@@ -53,14 +53,14 @@ void code(){
 	char c;
 	int taille;
 	char * chaine = malloc( TAILLE_MAX_CHAINE * sizeof(char));
-	char * entree = malloc( TAILLE_MAX_CHAINE * sizeof(char)); 
+	char * entree = malloc( TAILLE_MAX_CHAINE * sizeof(char));
 	char * temp = malloc( TAILLE_MAX_CHAINE * sizeof(char));
 	uint16_t code;
-	
+
 	c = lire_char();
 	sprintf(temp, "%c",c);
 	strcpy(chaine,temp);
-	
+
 	while(eof() != 0)
 	{
 		c = lire_char();
@@ -88,13 +88,13 @@ void code(){
 			#endif
 
 			sprintf(chaine, "%c",c);
-		
-		} 
-		
+
+		}
+
 		#ifdef DEBUG
 			printf("\n--------------------------------------------------\n\n");
 		#endif
-	
+
 	}
 
 	taille = getSize();
@@ -107,10 +107,11 @@ void code(){
 	ecrire_code(code,taille);
 
 	fin_de_fichier(257,taille);
+
 	free(chaine);
 	free(entree);
 	free(temp);
-	
+
 	#ifdef DEBUG
 		printf("Fin du programme\n");
 	#endif
@@ -120,14 +121,14 @@ void code(){
 
 int main(int argc, char* argv[]){
 
-    
+
     // Lecture des arguments sur la ligne de commande
-    
+
     if ( argc != 3 ){
         fprintf(stderr,"vous n'avez pas saisi les bons arguments :\n\tex: code_lwz fichier.txt sortie\n");
         exit(EXIT_FAILURE);
     }
-    
+
     if(init_fichier_compression(argv[1], argv[2]) < 0)
     {
         fprintf(stderr,"Erreur lors de l'ouverture de fichier \n");
@@ -135,12 +136,12 @@ int main(int argc, char* argv[]){
     }
     else
     	code();
-    	
-    close();	
+
+    close();
    return 0;
 
 }
-    
+
 
 
 
