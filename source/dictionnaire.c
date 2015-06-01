@@ -10,7 +10,9 @@ char* getCharByCode(unsigned int c)
 {
     if (c > 0 && c < 256)
     {
-        return (char)c;
+        char* code = malloc(sizeof(char));
+        code[0]=(char)c;
+        return code;
     } else if (c == 257)
     {
         return "\0";
@@ -185,7 +187,10 @@ void add(char* c) {
 // Author : Quentin
 int getSize()
 {
-	return log(sizeOfDico)/log(2);
+    #ifdef DEBUG
+    printf("taille dico : %i | log(tailledico)/log(2) : %f /n ", sizeOfDico, ceil(log(sizeOfDico)/log(2)));
+    #endif
+	return ceil(log(sizeOfDico)/log(2));
 }
 
 ////////////////////////////////////////////////////////////////
@@ -197,7 +202,6 @@ void init()
 	{
 		//dico[i] = malloc(sizeof(cell));
 		dico[i] = NULL;
-		cell* newCell = malloc(sizeof(cell));
 	}
 }
 
