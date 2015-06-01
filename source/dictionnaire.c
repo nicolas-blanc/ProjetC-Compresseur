@@ -8,7 +8,20 @@ int sizeOfDico = TAILLE_DICO;
 //
 char* getCharByCode(unsigned int c)
 {
-	return hashmap[c]->string;
+    if (c > 0 && c < 256)
+    {
+        return (char)c;
+    } else if (c == 257)
+    {
+        return "\0";
+    } else if (c > 257)
+    {
+        return hashmap[c]->string;
+    } else
+    {
+        return "";
+    }
+
 }
 
 ////////////////////////////////////////////////////////////////
@@ -18,6 +31,7 @@ unsigned int getCodeByChar(char* c)
 {
 	return isExist(c);
 }
+
 
 
 ////////////////////////////////////////////////////////////////
@@ -42,6 +56,7 @@ void add(char* c) {
         newCell->code = sizeOfDico;
         newCell->next = NULL;
         newCell->down = NULL;
+
 
 
         #ifdef DEBUG
@@ -182,6 +197,7 @@ void init()
 	{
 		//dico[i] = malloc(sizeof(cell));
 		dico[i] = NULL;
+		cell* newCell = malloc(sizeof(cell));
 	}
 }
 
