@@ -33,7 +33,7 @@ void concat( char * dest, char reste)
 
 char temp[2];
 temp[0]=reste;
-temp[1]='\n';
+temp[1]='\0';
 strcat(dest, temp);
 
 }
@@ -63,18 +63,32 @@ void code(){
 
 	while(eof() != 0)
 	{
+		#ifdef DEBUG
+			printf("-------------------- Nouvelle boucle --------------------\n");
+		#endif
+
 		c = lire_char();
 		strcpy(temp,chaine);
 		concat(temp, c);
+		#ifdef DEBUG
+			printf("c : %c/ // Concatener : %s/\n", c, temp);
+		#endif
 		if (isExist(temp) >= 0)
+		{
 			chaine = temp;
+			#ifdef DEBUG
+				printf("Ancienne chaine : %s/ // Nouvelle Chaine : %s/\n", temp, chaine);
+			#endif
+			printf("On est passe la dedans\n");
+
+		}
 		else
 		{
 			taille = getSize();
 			code = getCodeByChar(chaine);
 
 			#ifdef DEBUG
-				printf("Code a ecrire : %04x, taille : %d\n", code, taille);
+				printf("Chaine : %s/ ,Code a ecrire : %04x, taille : %d\n",chaine, code, taille);
 			#endif
 
 			ecrire_code(code,taille);
@@ -84,15 +98,14 @@ void code(){
 			#ifdef DEBUG
 				taille = getSize();
 				code = getCodeByChar(chaine);
-				printf("Code ajoute : %04x, nouvelle taille : %d\n", code, taille);
+				printf("Chaine ajoute : %s/ ,Code ajoute : %04x, nouvelle taille : %d\n",chaine, code, taille);
 			#endif
 
 			sprintf(chaine, "%c",c);
-
 		}
 
 		#ifdef DEBUG
-			printf("\n--------------------------------------------------\n\n");
+			printf("\n---------------------------------------------------------\n\n");
 		#endif
 
 	}

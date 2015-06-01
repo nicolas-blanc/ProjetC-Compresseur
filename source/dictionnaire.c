@@ -213,7 +213,7 @@ int isExist(char* c){
 
     #ifdef DEBUG
     printf("TEST ISEXIST \n");
-    printf("On recherche : %s\n",c);
+    printf("On recherche : %s/\n",c);
     #endif
 
     /**On cherche le premier caractere dans le tableau*/
