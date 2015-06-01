@@ -114,7 +114,7 @@ void add(char* c) {
                 if(!(strcmp(currentCell->string,newc) == 0) && currentCell->next == NULL) {
                     /** On insert en next */
                     #ifdef DEBUG
-                    printf("la chaine de caractere ne correspond && next point vers NULL : Ajout en next \n");
+                    printf("la chaine de caractere ne correspond && next point vers NULL : Ajout en next \nOn ajoute %s au next de %s\n",newCell->string,currentCell->string);
                     #endif
                     currentCell->next = newCell;
                     sizeOfDico++;
@@ -143,7 +143,7 @@ void add(char* c) {
                 else if ((strcmp(currentCell->string,newc) == 0) && currentCell->down == NULL && (sizec - strlen(newc)) == 1) {
                     /** On insert en down */
                     #ifdef DEBUG
-                    printf("la chaine de caractere ne correspond pas && down point vers NULL : Ajout en down \n");
+                    printf("la chaine de caractere ne correspond pas && down point vers NULL : Ajout en down \nOn ajoute %s en down de %s\n",newCell->string,currentCell->string);
                     #endif
                     currentCell->down = newCell;
                     sizeOfDico++;
@@ -161,7 +161,7 @@ void add(char* c) {
         // Si le premier caractere correspond a une case du tableau && le pointeur est null && sizec==2 : on fait pointer la case vers une nouvelle cellule contenant le caractere
         else if ((int)c[i] >= 0 && (int)c[i] <= (TAILLE_DICO - 1) && dico[(int)c[i]] == NULL && sizec==2) {
             #ifdef DEBUG
-            printf("on trouve le premier caractere, le pointeur pointe vers null et la longueur est egale a 2 : on fait pointer la case vers une nouvelle cellule contenant le caractere\n");
+            printf("on trouve le premier caractere, le pointeur pointe vers null et la longueur est egale a 2 : on fait pointer la case vers une nouvelle cellule contenant le caractere\nOn ajoute %s dans le dictionnaire ˆ la case %s\n",newCell->string,c[i]);
             #endif
             dico[(int)c[i]] = newCell;
             sizeOfDico++;
@@ -188,7 +188,7 @@ void add(char* c) {
 int getSize()
 {
     #ifdef DEBUG
-    printf("taille dico : %i | log(tailledico)/log(2) : %f /n ", sizeOfDico, ceil(log(sizeOfDico)/log(2)));
+    printf("taille dico : %i | log(tailledico)/log(2) : %f \n ", sizeOfDico, ceil(log(sizeOfDico)/log(2)));
     #endif
 	return ceil(log(sizeOfDico)/log(2));
 }
