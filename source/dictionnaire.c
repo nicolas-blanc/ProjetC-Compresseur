@@ -8,7 +8,20 @@ int sizeOfDico = TAILLE_DICO;
 //
 char* getCharByCode(unsigned int c)
 {
-	return hashmap[c]->string;
+    if (c > 0 && c < 256)
+    {
+        return (char)c;
+    } else if (c == 257)
+    {
+        return "\0";
+    } else if (c > 257)
+    {
+        return hashmap[c]->string;
+    } else
+    {
+        return "";
+    }
+
 }
 
 ////////////////////////////////////////////////////////////////
@@ -20,6 +33,7 @@ unsigned int getCodeByChar(char* c)
 }
 
 /**
+
 
 ////////////////////////////////////////////////////////////////
 // Author : Quentin
@@ -44,6 +58,7 @@ void add(char* c)
                 printf("researchString[0] = %c en (int) = %i",researchString[0],(int)researchString[0]);
                 if(currentCell == NULL) {
                     printf("\nc'est null\n");
+
                 } else {
                     printf("String : %s",currentCell->string);
                 }
@@ -117,6 +132,7 @@ void add(char* c)
                             if(currentCell->down == NULL) {
                                 // Il n'existe pas de cell en bas, on fait donc l'insertion
                                 currentCell->down = newCell;
+
                                 printf("J'ai insert %s dans le down de %s\n",c,currentCell->string);
                                 sizeOfDico++;
                                 insert++;
@@ -171,6 +187,7 @@ void add(char* c) {
         newCell->code = sizeOfDico;
         newCell->next = NULL;
         newCell->down = NULL;
+
 
 
         #ifdef DEBUG
@@ -264,7 +281,8 @@ void add(char* c) {
                 }
                 //Sinon on ne peut ajouter le caractere
                 else  {
-                    printf("ERREUR : la chaine de caractere ne peut pas etre ajoute car le debut de cette chaine n'appartient pas au dictionnaire\n");
+                    printf("ERREUR : la chaine de c
+aractere ne peut pas etre ajoute car le debut de cette chaine n'appartient pas au dictionnaire\n");
                     return;
                 }
             }
@@ -310,6 +328,7 @@ void init()
 	{
 		//dico[i] = malloc(sizeof(cell));
 		dico[i] = NULL;
+		cell* newCell = malloc(sizeof(cell));
 	}
 }
 
