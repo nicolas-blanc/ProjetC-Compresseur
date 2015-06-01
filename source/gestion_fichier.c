@@ -14,7 +14,7 @@ int init_fichier_compression(char * nom_fin, char * nom_fout) {
 	#ifdef DEBUG
 		printf("Debut init_fichier_compression\n");
 	#endif
-	
+
 	fin = NULL;
 	fout = NULL;
 	fdf = -1;
@@ -23,6 +23,7 @@ int init_fichier_compression(char * nom_fin, char * nom_fout) {
 
 	int e = 0;
 
+/*
 	char * ajout_fin = malloc (sizeof(char) * (strlen(nom_fin) + 3));
 	strcpy(ajout_fin,"../");
 	char * ajout_fout = malloc (sizeof(char) * (strlen(nom_fout) + 3));
@@ -30,14 +31,16 @@ int init_fichier_compression(char * nom_fin, char * nom_fout) {
 
 	strcat(ajout_fin,nom_fin);
 	strcat(ajout_fout,nom_fout);
+*/
+	strcat(nom_fout,".z");
 
 	#ifdef DEBUG
-		printf("Nom final du fichier fin : %s\n", ajout_fin);
-		printf("Nom final du fichier fout : %s\n", ajout_fout);
+		printf("Nom final du fichier fin : %s\n", nom_fin);
+		printf("Nom final du fichier fout : %s\n", nom_fout);
 	#endif
 
 	fin = fopen(nom_fin,"r");
-	fout = fopen(nom_fout,"wb+");
+	fout = fopen(nom_fout,"wb");
 
 	if (fin == NULL || fout == NULL)
 		e--;
@@ -51,7 +54,7 @@ int init_fichier_compression(char * nom_fin, char * nom_fout) {
 
 int init_fichier_decompression(char * nom_fin, char * nom_fout) {
 	#ifdef DEBUG
-		printf("Debut init_fichier_decompression\n");
+		printf("Debut init_fichier_decompression -- fin : %s -- fout : %s \n", nom_fin, nom_fout);
 	#endif
 	
 	fin = NULL;
@@ -62,24 +65,30 @@ int init_fichier_decompression(char * nom_fin, char * nom_fout) {
 
 	int e = 0;
 
+/*
 	char * ajout_fin = malloc (sizeof(char) * (strlen(nom_fin) + 3));
 	strcpy(ajout_fin,"../");
 	char * ajout_fout = malloc (sizeof(char) * (strlen(nom_fout) + 3));
 	strcpy(ajout_fout,"../");
 
+	strcat(ajout_fout, nom_fout);
+
 	strcat(ajout_fin,nom_fin);
-	strcat(ajout_fout,nom_fout);
+*/
+//	strcat(nom_fin,".z");
 
 	#ifdef DEBUG
-		printf("Nom final du fichier fin : %s\n", ajout_fin);
-		printf("Nom final du fichier fout : %s\n", ajout_fout);
+		printf("Nom final du fichier fin : %s\n", nom_fin);
+		printf("Nom final du fichier fout : %s\n", nom_fout);
 	#endif
 
 	fin = fopen(nom_fin,"rb");
-	fout = fopen(nom_fout,"w+");
+	fout = fopen(nom_fout,"w");
 
 	if (fin == NULL || fout == NULL)
 		e--;
+
+	fseek(fout, 0, SEEK_SET);
 
 	#ifdef DEBUG
 		printf("Fin init_fichier_decompression\n");
@@ -98,7 +107,11 @@ int eof() {
 }
 
 void ecrire_char(char * chaine) {
-	fputs(chaine, fout);
+	#ifdef DEBUG
+		printf("Ecriture de : %s dans le fichier\n", chaine);
+	#endif
+
+	fputc(chaine[0], fout);
 }
 
 void ecrire_code(uint16_t code, int taille) { // Gestion de fin de fichier -> si le buffer est encore plein

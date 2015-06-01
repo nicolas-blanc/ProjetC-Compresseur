@@ -1,6 +1,5 @@
-
-EXECS_PERSO=testCodage testDecodage
-EXECS=code_lzw 	decode_lzw
+EXECS_TEST=code_lzw decode_lzw testCodage testDecodage
+EXECS=lumino_lzw
 
 CC=gcc -g 
 OPT= -O3
@@ -19,9 +18,12 @@ code_lzw: code_lzw.o gestion_fichier.o dictionnaire.o include/dictionnaire.h
 	
 decode_lzw: decode_lzw.o gestion_fichier.o dictionnaire.o include/dictionnaire.h 
 	$(CC) $(OPTION) $(OPT) -o $@ $^ -lm
+
+lumino_lzw: lzw.o code_lzw.o decode_lzw.o gestion_fichier.o dictionnaire.o include/dictionnaire.h
+	$(CC) $(OPTION) $(OPT) -o $@ $^ -lm
 	
 clean_execs:
-	rm -f $(EXECS) $(EXECS_PERSO)
+	rm -f $(EXECS) $(EXECS_TEST)
 
 clean_o:
 	rm -f *.o

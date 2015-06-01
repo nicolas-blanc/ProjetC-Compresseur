@@ -1,5 +1,6 @@
 #include "dictionnaire.h"
 #include "gestion_fichier.h"
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -27,14 +28,7 @@
 
 //==========================================*/
 
-void concat( char * dest, char reste)
-{
-	/*char temp[2];
-	temp[0]=reste;
-	temp[1]='\0';
-	strcat(dest, temp);*/
-	/*char* temp = malloc(sizeof(char));
-	temp[0] = reste;*/
+void concat_code( char * dest, char reste) {
 	strcat(dest,&reste);
 }
 
@@ -68,51 +62,51 @@ void code(){
 		#endif
 
 		c = lire_char();
-		strcpy(temp,chaine);
-		concat(temp, c);
-		#ifdef DEBUG
-			printf("c : %c/ // Concatener : %s/\n", c, temp);
+		printf("Caractere lu : %c/\n", c);
 
-			printf("---------------------------------------------------------------------------\n");
-			printf("%d\n", isExist("Na"));
-			printf("---------------------------------------------------------------------------\n");
-
-		#endif
-		if (isExist(temp) >= 0)
-		{
-			chaine = temp;
-			#ifdef DEBUG
-				printf("Ancienne chaine : %s/ // Nouvelle Chaine : %s/\n", temp, chaine);
-			#endif
-			printf("On est passe la dedans\n");
-
-		}
-		else
-		{
-			taille = getSize();
-			code = getCodeByChar(chaine);
+			//if (c != -1) {
+			strcpy(temp,chaine);
+			concat_code(temp, c);
 
 			#ifdef DEBUG
-				printf("Chaine : %s/ ,Code a ecrire : %04x, taille : %d\n",chaine, code, taille);
+				printf("c : %c/ // Concatener : %s/\n", c, temp);
 			#endif
 
-			ecrire_code(code,taille);
-			concat(chaine, c);
-			add(chaine);
+			if (isExist(temp) >= 0)
+			{
+				chaine = temp;
+				#ifdef DEBUG
+					printf("Ancienne chaine : %s/ // Nouvelle Chaine : %s/\n", temp, chaine);
+				#endif
+				printf("On est passe la dedans\n");
 
-			#ifdef DEBUG
+			}
+			else
+			{
 				taille = getSize();
 				code = getCodeByChar(chaine);
-				printf("Chaine ajoute : %s/, nouvelle taille : %d\n",chaine, taille);
+
+				#ifdef DEBUG
+					printf("Chaine : %s/ ,Code a ecrire : %04x, taille : %d\n",chaine, code, taille);
+				#endif
+
+				ecrire_code(code,taille);
+				concat_code(chaine, c);
+				add(chaine);
+
+				#ifdef DEBUG
+					taille = getSize();
+					code = getCodeByChar(chaine);
+					printf("Chaine ajoute : %s/, nouvelle taille : %d\n",chaine, taille);
+				#endif
+
+				sprintf(chaine, "%c",c);
+			}
+
+			#ifdef DEBUG
+				printf("\n---------------------------------------------------------\n\n");
 			#endif
-
-			sprintf(chaine, "%c",c);
-		}
-
-		#ifdef DEBUG
-			printf("\n---------------------------------------------------------\n\n");
-		#endif
-
+		//}
 	}
 
 	taille = getSize();
@@ -122,7 +116,7 @@ void code(){
 		printf("Code a ecrire : %04x, taille : %d\n", code, taille);
 	#endif
 
-	ecrire_code(code,taille);
+//	ecrire_code(code,taille);
 
 	fin_de_fichier(257,taille);
 
@@ -136,7 +130,7 @@ void code(){
 
 }
 
-
+/*
 int main(int argc, char* argv[]){
 
 
@@ -159,7 +153,4 @@ int main(int argc, char* argv[]){
    return 0;
 
 }
-
-
-
-
+*/

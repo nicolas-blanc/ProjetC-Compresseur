@@ -1,19 +1,13 @@
 #include "dictionnaire.h"
 #include "gestion_fichier.h"
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
 
-void concat( char * dest, char reste)
-
-{
-
-char temp[2];
-temp[0]=reste;
-temp[1]='\n';
-strcat(dest, temp);
-
+void concat_decode( char * dest, char reste) {
+	strcat(dest,&reste);
 }
 
 void decode()
@@ -33,6 +27,10 @@ void decode()
 	ecrire_char(chaine);
 	while(code != 257)
 	{	
+		#ifdef DEBUG
+			printf("-------------------- Nouvelle boucle --------------------\n");
+		#endif
+
 		taille= getSize();
 		code = lire_code(taille);
 
@@ -40,24 +38,40 @@ void decode()
 		{
 			if(getCharByCode(code) == NULL)  {// si temp n'est pas dans le dico
 				strcpy(temp,chaine);
-				concat(temp, chaine[0]);
+				concat_decode(temp, chaine[0]);
 				strcpy(entree,temp);
 			}
 			else
 				entree = getCharByCode(code);
 			
+			#ifdef DEBUG
+				printf("Chaine a ecrire dans le fichier : %s/\n\n", entree);
+			#endif
+
 			ecrire_char(entree);
-			concat (chaine, entree[0]);
-			add(chaine);
+			concat_decode(chaine, entree[0]);
+			
+			#ifdef DEBUG
+				printf("Chaine ajoute dans le dico : %s/\n", chaine);
+			#endif
+
+			if (code != 257)
+				add(chaine);
 			strcpy(chaine,entree);
 		}
+
+		#ifdef DEBUG
+			printf("\n---------------------------------------------------------\n\n");
+		#endif
+
 	}
 	free(chaine);
 	free(entree);
 	free(temp);
 
 }
- 
+
+/* 
 int main(int argc, char* argv[]){
 
     
@@ -81,3 +95,4 @@ int main(int argc, char* argv[]){
    return 0;
 
 }
+*/

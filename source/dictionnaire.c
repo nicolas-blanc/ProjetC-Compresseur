@@ -18,6 +18,7 @@ char* getCharByCode(unsigned int c)
         return "\0";
     } else if (c > 257)
     {
+    	printf("getCharByCode c > 257 // c = %d\n", c);
         return hashmap[c]->string;
     } else
     {
