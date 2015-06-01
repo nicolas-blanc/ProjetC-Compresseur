@@ -161,7 +161,7 @@ void add(char* c) {
         // Si le premier caractere correspond a une case du tableau && le pointeur est null && sizec==2 : on fait pointer la case vers une nouvelle cellule contenant le caractere
         else if ((int)c[i] >= 0 && (int)c[i] <= (TAILLE_DICO - 1) && dico[(int)c[i]] == NULL && sizec==2) {
             #ifdef DEBUG
-            printf("on trouve le premier caractere, le pointeur pointe vers null et la longueur est egale a 2 : on fait pointer la case vers une nouvelle cellule contenant le caractere\nOn ajoute %s dans le dictionnaire ˆ la case %s\n",newCell->string,c[i]);
+            printf("on trouve le premier caractere, le pointeur pointe vers null et la longueur est egale a 2 : on fait pointer la case vers une nouvelle cellule contenant le caractere\nOn ajoute %s\n",newCell->string);
             #endif
             dico[(int)c[i]] = newCell;
             sizeOfDico++;
@@ -217,7 +217,7 @@ int isExist(char* c){
 
     #ifdef DEBUG
     printf("TEST ISEXIST \n");
-    printf("On recherche : %s/\n",c);
+    printf("On recherche : %s\n",c);
     #endif
 
     /**On cherche le premier caractere dans le tableau*/

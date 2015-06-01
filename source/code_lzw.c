@@ -28,14 +28,14 @@
 //==========================================*/
 
 void concat( char * dest, char reste)
-
 {
-
-char temp[2];
-temp[0]=reste;
-temp[1]='\0';
-strcat(dest, temp);
-
+	/*char temp[2];
+	temp[0]=reste;
+	temp[1]='\0';
+	strcat(dest, temp);*/
+	/*char* temp = malloc(sizeof(char));
+	temp[0] = reste;*/
+	strcat(dest,&reste);
 }
 
 void code(){
@@ -72,6 +72,11 @@ void code(){
 		concat(temp, c);
 		#ifdef DEBUG
 			printf("c : %c/ // Concatener : %s/\n", c, temp);
+
+			printf("---------------------------------------------------------------------------\n");
+			printf("%d\n", isExist("Na"));
+			printf("---------------------------------------------------------------------------\n");
+
 		#endif
 		if (isExist(temp) >= 0)
 		{
@@ -98,7 +103,7 @@ void code(){
 			#ifdef DEBUG
 				taille = getSize();
 				code = getCodeByChar(chaine);
-				printf("Chaine ajoute : %s/ ,Code ajoute : %04x, nouvelle taille : %d\n",chaine, code, taille);
+				printf("Chaine ajoute : %s/, nouvelle taille : %d\n",chaine, taille);
 			#endif
 
 			sprintf(chaine, "%c",c);
