@@ -27,7 +27,6 @@
 
 //==========================================*/
 
-
 void concat( char * dest, char reste)
 
 {
@@ -41,7 +40,15 @@ strcat(dest, temp);
 
 void code(){
 
+	#ifdef DEBUG
+		printf("Début de l'initialisation\n");
+	#endif
+
 	init();
+
+	#ifdef DEBUG
+		printf("Fin de l'initialisation\n");
+	#endif
 
 	char c;
 	int taille;
@@ -54,7 +61,7 @@ void code(){
 	sprintf(temp, "%c",c);
 	strcpy(chaine,temp);
 	
-	while(eof()< 0)
+	while(eof() != 0)
 	{
 		c = lire_char();
 		strcpy(temp,chaine);
@@ -72,17 +79,24 @@ void code(){
 		
 		} 
 		
+		#ifdef DEBUG
+			printf("\n\n");
+		#endif
 	
 	}
+
 	taille = getSize();
 	code = getCodeByChar(chaine);
-	ecrire_code(code,taille);
+	ecrire_code(code,taille);	
 	code = 257; 
 	fin_de_fichier(code,taille);
 	free(chaine);
 	free(entree);
 	free(temp);
 	
+	#ifdef DEBUG
+		printf("Fin du programme\n");
+	#endif
 
 }
 

@@ -191,7 +191,7 @@ void fin_de_fichier(uint16_t code, int taille) {
 
 int lire_char() {
 	int car = 0;
-	if (!(fdf)) {
+	if (fdf != 0) {
 		car = fgetc(fin);
 		
 		if(car == EOF) { fdf = 0; car = -1; }

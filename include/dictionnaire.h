@@ -13,10 +13,10 @@
 
 typedef struct cell cell;
 struct cell {
-char* string;
-unsigned int code;
-cell* next;
-cell* down;
+	char* string;
+	unsigned int code;
+	cell* next;
+	cell* down;
 };
 
 
