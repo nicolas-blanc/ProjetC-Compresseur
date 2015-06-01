@@ -189,7 +189,7 @@ int getSize()
 {
     #ifdef DEBUG
     printf("taille dico : %i | log(tailledico)/log(2) : %f /n ", sizeOfDico, ceil(log(sizeOfDico)/log(2)));
-    #endif DEBUG
+    #endif
 	return ceil(log(sizeOfDico)/log(2));
 }
 
