@@ -106,7 +106,7 @@ void ecrire_code(uint16_t code, int taille) { // Gestion de fin de fichier -> si
 	uint32_t masque;
 
 	#ifdef DEBUG
-		printf("Buffer d'écriture : %04x\n", write_buffer);
+		printf("Buffer d'ecriture : %04x\n", write_buffer);
 		printf("Code : %04x\n", code);
 	#endif
 
@@ -132,13 +132,13 @@ void ecrire_code(uint16_t code, int taille) { // Gestion de fin de fichier -> si
 
 		#ifdef DEBUG
 			printf("Buffer : %08x et nb_buf = %d\n", buffer, nb_buf);
-			printf("Buffer d'écriture : %04x\n", write_buffer);
+			printf("Buffer d'ecriture : %04x\n", write_buffer);
 		#endif
 
 		buffer = buffer & ~masque;
 
 		#ifdef DEBUG
-			printf("Buffer après déplacement: %08x\n", buffer);
+			printf("Buffer apres deplacement: %08x\n", buffer);
 		#endif
 
 		fwrite(&write_buffer,sizeof(uint16_t),1,fout);
@@ -171,13 +171,13 @@ void fin_de_fichier(uint16_t code, int taille) {
 
 		#ifdef DEBUG
 			printf("Buffer : %08x et nb_buf = %d\n", buffer, nb_buf);
-			printf("Buffer d'écriture : %04x\n", write_buffer);
+			printf("Buffer d'ecriture : %04x\n", write_buffer);
 		#endif
 
 		buffer = buffer & ~masque;
 
 		#ifdef DEBUG
-			printf("Buffer après déplacement: %08x\n", buffer);
+			printf("Buffer apres deplacement: %08x\n", buffer);
 		#endif
 
 		fwrite(&write_buffer,sizeof(uint16_t),1,fout);

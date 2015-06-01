@@ -41,7 +41,7 @@ strcat(dest, temp);
 void code(){
 
 	#ifdef DEBUG
-		printf("Début de l'initialisation\n");
+		printf("Debut de l'initialisation\n");
 	#endif
 
 	init();
@@ -72,24 +72,41 @@ void code(){
 		{
 			taille = getSize();
 			code = getCodeByChar(chaine);
+
+			#ifdef DEBUG
+				printf("Code a ecrire : %04x, taille : %d\n", code, taille);
+			#endif
+
 			ecrire_code(code,taille);
 			concat(chaine, c);
 			add(chaine);
+
+			#ifdef DEBUG
+				taille = getSize();
+				code = getCodeByChar(chaine);
+				printf("Code ajoute : %04x, nouvelle taille : %d\n", code, taille);
+			#endif
+
 			sprintf(chaine, "%c",c);
 		
 		} 
 		
 		#ifdef DEBUG
-			printf("\n\n");
+			printf("\n--------------------------------------------------\n\n");
 		#endif
 	
 	}
 
 	taille = getSize();
 	code = getCodeByChar(chaine);
-	ecrire_code(code,taille);	
-	code = 257; 
-	fin_de_fichier(code,taille);
+
+	#ifdef DEBUG
+		printf("Code a ecrire : %04x, taille : %d\n", code, taille);
+	#endif
+
+	ecrire_code(code,taille);
+
+	fin_de_fichier(257,taille);
 	free(chaine);
 	free(entree);
 	free(temp);
@@ -107,7 +124,7 @@ int main(int argc, char* argv[]){
     // Lecture des arguments sur la ligne de commande
     
     if ( argc != 3 ){
-        fprintf(stderr,"vous n'avaez pas saisi les bons arguments :\n\tex: code_lwz fichier.txt sortie\n");
+        fprintf(stderr,"vous n'avez pas saisi les bons arguments :\n\tex: code_lwz fichier.txt sortie\n");
         exit(EXIT_FAILURE);
     }
     

@@ -5,8 +5,7 @@ EXECS=code_lzw 	decode_lzw
 CC=gcc -g 
 OPT= -O3
 CFLAGS= -Wall -I include/ 
-OPTION=
-#-DDEBUG
+OPTION=-DDEBUG
 
 all: $(EXECS)
 
