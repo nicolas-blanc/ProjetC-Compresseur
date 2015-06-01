@@ -1,5 +1,5 @@
-#ifndef __DICTIONNAIRE_H_INCLUDED
-#define __DICTIONNAIRE_H_INCLUDED
+#ifndef DEF_DICOH // Si la constante n'a pas été définie le fichier n'a jamais été inclus
+#define DEF_DICOH // On définit la constante pour que la prochaine fois le fichier ne soit pas inclus
 
 #include <math.h>
 #include <string.h>
@@ -80,4 +80,3 @@ int isExist(char* c);
 void reset();
 
 #endif
-
