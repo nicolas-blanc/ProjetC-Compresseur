@@ -18,7 +18,7 @@ void concat_code( char * dest, char reste) {
 	char temp[2];
 	temp[0] = reste;
 	temp[1] = '\0';
-	strcat(dest,&reste);
+	strcat(dest,temp);
 }
 
 void code() {
@@ -84,6 +84,9 @@ void code() {
 
 				ecrire_code(code,taille);
 				concat_code(chaine, c);
+
+				printf("-------------------------------------------------------------------------- Chaine a ajouter : %s\n", chaine);
+
 				add(chaine);
                 chaine =  malloc(TAILLE_MAX_CHAINE * sizeof(char));
 				#ifdef DEBUG
@@ -118,7 +121,7 @@ void code() {
 	//free(temp);
 
 	#ifdef DEBUG
-		display();
+//		display();
 		printf("Fin du programme\n");
 	#endif
 

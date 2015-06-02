@@ -1,7 +1,10 @@
 #include "decode_lzw.h"
 
 void concat_decode( char * dest, char reste) {
-	strcat(dest,&reste);
+	char temp[2];
+	temp[0] = reste;
+	temp[1] = '\0';
+	strcat(dest,temp);
 }
 
 void decode() {

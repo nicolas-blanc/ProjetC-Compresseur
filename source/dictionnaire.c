@@ -203,7 +203,7 @@ void add(char* c) {
 int getSize()
 {
     #ifdef DEBUG
-    printf("taille dico : %i | log(tailledico)/log(2) : %f \n ", sizeOfDico, ceil(log(sizeOfDico)/log(2)));
+    printf("taille dico : %i | log(tailledico)/log(2) : %f \n ", sizeOfDico, ceil(log(sizeOfDico + 1)/log(2)));
     #endif
 	return ceil(log(sizeOfDico + 1)/log(2));
 }
