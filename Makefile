@@ -1,4 +1,4 @@
-EXECS_TEST=code_lzw #decode_lzw testCodage testDecodage
+EXECS_TEST=code_lzw decode_lzw #testCodage testDecodage
 EXECS=code_lzw#lumino_lzw
 
 CC=gcc -g 
@@ -8,7 +8,7 @@ OPTION=-DDEBUG
 
 all: $(EXECS)
 
-test_unit: $(EXECS_PERSO)
+test_unit: $(EXECS_TEST)
 
 %.o: source/%.c
 	$(CC) $(OPTION) $(CFLAGS) -c $^

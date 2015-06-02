@@ -20,7 +20,7 @@ void decode()
 	char * temp = malloc( TAILLE_MAX_CHAINE * sizeof(char));
 	
 	init();
-	taille= getSize();
+	taille = getSize();
 	code = lire_code(taille); // TODO : lire_code : ok
 	chaine = getCharByCode(code); 
 	
@@ -31,7 +31,7 @@ void decode()
 			printf("-------------------- Nouvelle boucle --------------------\n");
 		#endif
 
-		taille= getSize();
+		taille = getSize();
 		code = lire_code(taille);
 
 		if(code != 257) //pour pas écrire le EOF
@@ -55,8 +55,11 @@ void decode()
 				printf("Chaine ajoute dans le dico : %s/\n", chaine);
 			#endif
 
-			if (code != 257)
+			if (code != 257) {
 				add(chaine);
+				chaine =  malloc(TAILLE_MAX_CHAINE * sizeof(char));
+			}
+
 			strcpy(chaine,entree);
 		}
 
@@ -65,13 +68,16 @@ void decode()
 		#endif
 
 	}
-	free(chaine);
-	free(entree);
-	free(temp);
 
+	//free(chaine);
+	//free(entree);
+	//free(temp);
+
+	#ifdef DEBUG
+		printf("Fin du programme\n");
+	#endif
 }
 
-/* 
 int main(int argc, char* argv[]){
 
     
@@ -95,4 +101,3 @@ int main(int argc, char* argv[]){
    return 0;
 
 }
-*/

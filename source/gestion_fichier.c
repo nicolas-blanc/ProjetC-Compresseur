@@ -111,7 +111,7 @@ void ecrire_char(char * chaine) {
 		printf("Ecriture de : %s dans le fichier\n", chaine);
 	#endif
 
-	fputc(chaine[0], fout);
+	fputs(chaine, fout);
 }
 
 void ecrire_code(uint16_t code, int taille) { // Gestion de fin de fichier -> si le buffer est encore plein
