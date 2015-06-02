@@ -53,8 +53,6 @@ void code() {
 		c = lire_char();
 		//printf("Caractere lu : %c/\n", c);
 
-			printf("Chaine : %s/\n", chaine);
-
 			strcpy(temp,chaine);
 			concat_code(temp, c);
 
@@ -74,8 +72,6 @@ void code() {
 			{
 				taille = getSize();
 
-				printf(" ------------------------- Chaine : %s/\n", chaine);
-
 				code = getCodeByChar(chaine);
 
 				#ifdef DEBUG
@@ -84,8 +80,6 @@ void code() {
 
 				ecrire_code(code,taille);
 				concat_code(chaine, c);
-
-				printf("-------------------------------------------------------------------------- Chaine a ajouter : %s\n", chaine);
 
 				add(chaine);
                 chaine =  malloc(TAILLE_MAX_CHAINE * sizeof(char));
@@ -121,7 +115,7 @@ void code() {
 	//free(temp);
 
 	#ifdef DEBUG
-//		display();
+		display();
 		printf("Fin du programme\n");
 	#endif
 

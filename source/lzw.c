@@ -1,5 +1,7 @@
-#include "dictionnaire.h"
 #include "gestion_fichier.h"
+
+#include "code_lzw.h"
+#include "decode_lzw.h"
 
 #include <stdio.h>
 #include <stdlib.h>
