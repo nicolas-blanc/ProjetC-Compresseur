@@ -1,0 +1,212 @@
+\hypertarget{dictionnaire_8c}{\section{source/dictionnaire.c File Reference}
+\label{dictionnaire_8c}\index{source/dictionnaire.\-c@{source/dictionnaire.\-c}}
+}
+
+
+gestion du dictionnaire  
+
+
+{\ttfamily \#include \char`\"{}dictionnaire.\-h\char`\"{}}\\*
+{\ttfamily \#include $<$stdio.\-h$>$}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \hyperlink{dictionnaire_8c_a01ed6180ae0c390e184f1b55242b8d02}{get\-Char\-By\-Code} (unsigned int c)
+\begin{DoxyCompactList}\small\item\em Fontion de Recuperation d'un string à partir d'un code. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{dictionnaire_8c_afaca0468551063211f75a373d11a3c40}{get\-Code\-By\-Char} (char $\ast$c)
+\begin{DoxyCompactList}\small\item\em Fontion de Recuperation du code à partir du string. \end{DoxyCompactList}\item 
+void \hyperlink{dictionnaire_8c_add677d334497fd304d12ff22bd58a1f8}{add} (char $\ast$c)
+\begin{DoxyCompactList}\small\item\em Fontion d'ajout d'un string dans le dictionnaire. \end{DoxyCompactList}\item 
+int \hyperlink{dictionnaire_8c_a3c4029b904a61a9873e6d12785ce19a1}{get\-Size} ()
+\begin{DoxyCompactList}\small\item\em Fontion de recuperation du nombre de bits de code. \end{DoxyCompactList}\item 
+void \hyperlink{dictionnaire_8c_a02fd73d861ef2e4aabb38c0c9ff82947}{init} ()
+\begin{DoxyCompactList}\small\item\em initialise le dictionnaire \end{DoxyCompactList}\item 
+int \hyperlink{dictionnaire_8c_a4faa9d1ef582d66d45b4e45bd2d4ba08}{is\-Exist} (char $\ast$c)
+\begin{DoxyCompactList}\small\item\em teste si un string existe dans le dictionnaire \end{DoxyCompactList}\item 
+void \hyperlink{dictionnaire_8c_ad20897c5c8bd47f5d4005989bead0e55}{reset} ()
+\begin{DoxyCompactList}\small\item\em fonction qui libère la hashmap et liere le dictionnaire \end{DoxyCompactList}\item 
+\hypertarget{dictionnaire_8c_af1e36755be9ff6b64e680662d372f9c1}{void {\bfseries display\-S\-S\-Cell} (\hyperlink{structcell}{cell} $\ast$ssdico)}\label{dictionnaire_8c_af1e36755be9ff6b64e680662d372f9c1}
+
+\item 
+void \hyperlink{dictionnaire_8c_a1e5b20fed15743656bb6d2e6a6ea6269}{display} ()
+\begin{DoxyCompactList}\small\item\em Fonction pour afficher le dictionnaire. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{dictionnaire_8c_a40b0b56941c726f94eabe3e564443a71}{int {\bfseries size\-Of\-Dico} = T\-A\-I\-L\-L\-E\-\_\-\-D\-I\-C\-O}\label{dictionnaire_8c_a40b0b56941c726f94eabe3e564443a71}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+gestion du dictionnaire \begin{DoxyAuthor}{Author}
+B\-L\-A\-N\-C -\/ G\-E\-R\-R\-Y -\/ N\-D\-I\-A\-Y\-E -\/ R\-A\-C\-H\-E\-X 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+M\-A\-I 2015 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\hypertarget{dictionnaire_8c_add677d334497fd304d12ff22bd58a1f8}{\index{dictionnaire.\-c@{dictionnaire.\-c}!add@{add}}
+\index{add@{add}!dictionnaire.c@{dictionnaire.\-c}}
+\subsubsection[{add}]{\setlength{\rightskip}{0pt plus 5cm}void add (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{c}
+\end{DoxyParamCaption}
+)}}\label{dictionnaire_8c_add677d334497fd304d12ff22bd58a1f8}
+
+
+Fontion d'ajout d'un string dans le dictionnaire. 
+
+toutes les chaines de caractere unitaires sont deja dans le dictionnaire, on ne peut ajouter que des chaines de longueur $>$1 on ne peut ajouter une chaines de longueur n uniquement si le debut de chaine de longueur n-\/1 est deja dans le dictionnaire 
+\begin{DoxyParams}{Parameters}
+{\em c} & la chaine qu'on veut ajouter \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+On cherche le premier caractere dans le tableau
+
+On parcours les listes chaines pour trouver la chaine de caractere (apres parcours du tableau)
+
+On insert en next
+
+On insert en down \hypertarget{dictionnaire_8c_a1e5b20fed15743656bb6d2e6a6ea6269}{\index{dictionnaire.\-c@{dictionnaire.\-c}!display@{display}}
+\index{display@{display}!dictionnaire.c@{dictionnaire.\-c}}
+\subsubsection[{display}]{\setlength{\rightskip}{0pt plus 5cm}void display (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{dictionnaire_8c_a1e5b20fed15743656bb6d2e6a6ea6269}
+
+
+Fonction pour afficher le dictionnaire. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em void} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\hypertarget{dictionnaire_8c_a01ed6180ae0c390e184f1b55242b8d02}{\index{dictionnaire.\-c@{dictionnaire.\-c}!get\-Char\-By\-Code@{get\-Char\-By\-Code}}
+\index{get\-Char\-By\-Code@{get\-Char\-By\-Code}!dictionnaire.c@{dictionnaire.\-c}}
+\subsubsection[{get\-Char\-By\-Code}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ get\-Char\-By\-Code (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{c}
+\end{DoxyParamCaption}
+)}}\label{dictionnaire_8c_a01ed6180ae0c390e184f1b55242b8d02}
+
+
+Fontion de Recuperation d'un string à partir d'un code. 
+
+returne la chaine correspondant avec le hashmap 
+\begin{DoxyParams}{Parameters}
+{\em c} & le code \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+le string correspondant au code 
+\end{DoxyReturn}
+\hypertarget{dictionnaire_8c_afaca0468551063211f75a373d11a3c40}{\index{dictionnaire.\-c@{dictionnaire.\-c}!get\-Code\-By\-Char@{get\-Code\-By\-Char}}
+\index{get\-Code\-By\-Char@{get\-Code\-By\-Char}!dictionnaire.c@{dictionnaire.\-c}}
+\subsubsection[{get\-Code\-By\-Char}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int get\-Code\-By\-Char (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{c}
+\end{DoxyParamCaption}
+)}}\label{dictionnaire_8c_afaca0468551063211f75a373d11a3c40}
+
+
+Fontion de Recuperation du code à partir du string. 
+
+returne le code correspondant 
+\begin{DoxyParams}{Parameters}
+{\em c} & la chaine \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+le code correspondant au string 
+\end{DoxyReturn}
+\hypertarget{dictionnaire_8c_a3c4029b904a61a9873e6d12785ce19a1}{\index{dictionnaire.\-c@{dictionnaire.\-c}!get\-Size@{get\-Size}}
+\index{get\-Size@{get\-Size}!dictionnaire.c@{dictionnaire.\-c}}
+\subsubsection[{get\-Size}]{\setlength{\rightskip}{0pt plus 5cm}int get\-Size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{dictionnaire_8c_a3c4029b904a61a9873e6d12785ce19a1}
+
+
+Fontion de recuperation du nombre de bits de code. 
+
+retourne le nbre de bits pour gerer la taille variable
+
+
+\begin{DoxyParams}{Parameters}
+{\em void} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int coreespondant au nombre de bits du codage 
+\end{DoxyReturn}
+\hypertarget{dictionnaire_8c_a02fd73d861ef2e4aabb38c0c9ff82947}{\index{dictionnaire.\-c@{dictionnaire.\-c}!init@{init}}
+\index{init@{init}!dictionnaire.c@{dictionnaire.\-c}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void init (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{dictionnaire_8c_a02fd73d861ef2e4aabb38c0c9ff82947}
+
+
+initialise le dictionnaire 
+
+toutes les cases sont à null, on connait la valeur des string a l'init (suivant A\-S\-C\-I\-I 8 bits) 
+\begin{DoxyParams}{Parameters}
+{\em void} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\hypertarget{dictionnaire_8c_a4faa9d1ef582d66d45b4e45bd2d4ba08}{\index{dictionnaire.\-c@{dictionnaire.\-c}!is\-Exist@{is\-Exist}}
+\index{is\-Exist@{is\-Exist}!dictionnaire.c@{dictionnaire.\-c}}
+\subsubsection[{is\-Exist}]{\setlength{\rightskip}{0pt plus 5cm}int is\-Exist (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{c}
+\end{DoxyParamCaption}
+)}}\label{dictionnaire_8c_a4faa9d1ef582d66d45b4e45bd2d4ba08}
+
+
+teste si un string existe dans le dictionnaire 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & la chaine qu'on recherche \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int \-: le code correspondant à la chaine ou -\/1 si pas present 
+\end{DoxyReturn}
+On cherche le premier caractere dans le tableau
+
+On parcours les listes chaines pour trouver la chaine de caractere (apres parcours du tableau) \hypertarget{dictionnaire_8c_ad20897c5c8bd47f5d4005989bead0e55}{\index{dictionnaire.\-c@{dictionnaire.\-c}!reset@{reset}}
+\index{reset@{reset}!dictionnaire.c@{dictionnaire.\-c}}
+\subsubsection[{reset}]{\setlength{\rightskip}{0pt plus 5cm}void reset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{dictionnaire_8c_ad20897c5c8bd47f5d4005989bead0e55}
+
+
+fonction qui libère la hashmap et liere le dictionnaire 
+
+reset le dictionnaire lorsqu'on atteint une certaine taille 
+\begin{DoxyParams}{Parameters}
+{\em void} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}

@@ -1,0 +1,223 @@
+\hypertarget{gestion__fichier_8c}{\section{source/gestion\-\_\-fichier.c File Reference}
+\label{gestion__fichier_8c}\index{source/gestion\-\_\-fichier.\-c@{source/gestion\-\_\-fichier.\-c}}
+}
+
+
+gestion du fichier  
+
+
+{\ttfamily \#include \char`\"{}gestion\-\_\-fichier.\-h\char`\"{}}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{gestion__fichier_8c_a1d5dab30b404fab91608086105afc78c}{\#define {\bfseries M\-A\-X\-\_\-\-B\-U\-F\-F\-E\-R}~32}\label{gestion__fichier_8c_a1d5dab30b404fab91608086105afc78c}
+
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{gestion__fichier_8c_a4eea16a928067a50fd2b888b19e21e8a}{init\-\_\-fichier\-\_\-compression} (const char $\ast$nom\-\_\-fin, const char $\ast$nom\-\_\-fout)
+\begin{DoxyCompactList}\small\item\em Fonction qui initialise les fichiers lors de la compression. \end{DoxyCompactList}\item 
+int \hyperlink{gestion__fichier_8c_adc729d4ecf98b823fb08a98eb080943f}{init\-\_\-fichier\-\_\-decompression} (const char $\ast$nom\-\_\-fin, const char $\ast$nom\-\_\-fout)
+\begin{DoxyCompactList}\small\item\em Fonction qui initialise les fichiers lors de la decompression. \end{DoxyCompactList}\item 
+void \hyperlink{gestion__fichier_8c_a5ae591df94fc66ccb85cbb6565368bca}{close} ()
+\begin{DoxyCompactList}\small\item\em Fonction qui ferme les fichiers. \end{DoxyCompactList}\item 
+int \hyperlink{gestion__fichier_8c_ad3b08ee28c831c153342772acdc2a18c}{eof} ()
+\begin{DoxyCompactList}\small\item\em Fonction qui teste la fin de fichier. \end{DoxyCompactList}\item 
+void \hyperlink{gestion__fichier_8c_a2b77f97f69484c146ca6f03ed708603f}{ecrire\-\_\-char} (char $\ast$chaine)
+\begin{DoxyCompactList}\small\item\em Fonction qui ecrit une chaine dans le fichier de sortie. \end{DoxyCompactList}\item 
+void \hyperlink{gestion__fichier_8c_a3e012c983f8d3aca3f491b09362babe1}{ecrire\-\_\-code} (uint16\-\_\-t code, int taille)
+\begin{DoxyCompactList}\small\item\em Fonction qui ecrit le code dans le fichier en fcontio du nombre de bits. \end{DoxyCompactList}\item 
+void \hyperlink{gestion__fichier_8c_a9e8bbd259516c1554bdd2a91f4617f90}{fin\-\_\-de\-\_\-fichier} (uint16\-\_\-t code, int taille)
+\begin{DoxyCompactList}\small\item\em Fonction qui ecrit en fin de fichier. \end{DoxyCompactList}\item 
+int \hyperlink{gestion__fichier_8c_a35050da77b13f2db7ccd0bed4751ac6f}{lire\-\_\-char} ()
+\begin{DoxyCompactList}\small\item\em Fonction qui lit un caractere. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{gestion__fichier_8c_aead7cc6a84d13ad7f4825676bef080db}{lire\-\_\-code} (int taille)
+\begin{DoxyCompactList}\small\item\em Fonction qui lit un code dans le fichier en fonction du nbre de bits. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+gestion du fichier \begin{DoxyAuthor}{Author}
+B\-L\-A\-N\-C -\/ G\-E\-R\-R\-Y -\/ N\-D\-I\-A\-Y\-E -\/ R\-A\-C\-H\-E\-X 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+M\-A\-I 2015 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\hypertarget{gestion__fichier_8c_a5ae591df94fc66ccb85cbb6565368bca}{\index{gestion\-\_\-fichier.\-c@{gestion\-\_\-fichier.\-c}!close@{close}}
+\index{close@{close}!gestion_fichier.c@{gestion\-\_\-fichier.\-c}}
+\subsubsection[{close}]{\setlength{\rightskip}{0pt plus 5cm}void close (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{gestion__fichier_8c_a5ae591df94fc66ccb85cbb6565368bca}
+
+
+Fonction qui ferme les fichiers. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em void} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\hypertarget{gestion__fichier_8c_a2b77f97f69484c146ca6f03ed708603f}{\index{gestion\-\_\-fichier.\-c@{gestion\-\_\-fichier.\-c}!ecrire\-\_\-char@{ecrire\-\_\-char}}
+\index{ecrire\-\_\-char@{ecrire\-\_\-char}!gestion_fichier.c@{gestion\-\_\-fichier.\-c}}
+\subsubsection[{ecrire\-\_\-char}]{\setlength{\rightskip}{0pt plus 5cm}void ecrire\-\_\-char (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{chaine}
+\end{DoxyParamCaption}
+)}}\label{gestion__fichier_8c_a2b77f97f69484c146ca6f03ed708603f}
+
+
+Fonction qui ecrit une chaine dans le fichier de sortie. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em chaine} & la chaine a ecrire \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\hypertarget{gestion__fichier_8c_a3e012c983f8d3aca3f491b09362babe1}{\index{gestion\-\_\-fichier.\-c@{gestion\-\_\-fichier.\-c}!ecrire\-\_\-code@{ecrire\-\_\-code}}
+\index{ecrire\-\_\-code@{ecrire\-\_\-code}!gestion_fichier.c@{gestion\-\_\-fichier.\-c}}
+\subsubsection[{ecrire\-\_\-code}]{\setlength{\rightskip}{0pt plus 5cm}void ecrire\-\_\-code (
+\begin{DoxyParamCaption}
+\item[{uint16\-\_\-t}]{code, }
+\item[{int}]{taille}
+\end{DoxyParamCaption}
+)}}\label{gestion__fichier_8c_a3e012c983f8d3aca3f491b09362babe1}
+
+
+Fonction qui ecrit le code dans le fichier en fcontio du nombre de bits. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em code} & le code qu'on veut ecrire taille\-: le nombre de bits du code \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\hypertarget{gestion__fichier_8c_ad3b08ee28c831c153342772acdc2a18c}{\index{gestion\-\_\-fichier.\-c@{gestion\-\_\-fichier.\-c}!eof@{eof}}
+\index{eof@{eof}!gestion_fichier.c@{gestion\-\_\-fichier.\-c}}
+\subsubsection[{eof}]{\setlength{\rightskip}{0pt plus 5cm}int eof (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{gestion__fichier_8c_ad3b08ee28c831c153342772acdc2a18c}
+
+
+Fonction qui teste la fin de fichier. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nom\-\_\-fin} & \-: le fichier d'entree nom\-\_\-fout\-: le fichier de sortie \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\hypertarget{gestion__fichier_8c_a9e8bbd259516c1554bdd2a91f4617f90}{\index{gestion\-\_\-fichier.\-c@{gestion\-\_\-fichier.\-c}!fin\-\_\-de\-\_\-fichier@{fin\-\_\-de\-\_\-fichier}}
+\index{fin\-\_\-de\-\_\-fichier@{fin\-\_\-de\-\_\-fichier}!gestion_fichier.c@{gestion\-\_\-fichier.\-c}}
+\subsubsection[{fin\-\_\-de\-\_\-fichier}]{\setlength{\rightskip}{0pt plus 5cm}void fin\-\_\-de\-\_\-fichier (
+\begin{DoxyParamCaption}
+\item[{uint16\-\_\-t}]{code, }
+\item[{int}]{taille}
+\end{DoxyParamCaption}
+)}}\label{gestion__fichier_8c_a9e8bbd259516c1554bdd2a91f4617f90}
+
+
+Fonction qui ecrit en fin de fichier. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em code} & le code qu'on veut eccrire taille\-: lenombre de bits \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\hypertarget{gestion__fichier_8c_a4eea16a928067a50fd2b888b19e21e8a}{\index{gestion\-\_\-fichier.\-c@{gestion\-\_\-fichier.\-c}!init\-\_\-fichier\-\_\-compression@{init\-\_\-fichier\-\_\-compression}}
+\index{init\-\_\-fichier\-\_\-compression@{init\-\_\-fichier\-\_\-compression}!gestion_fichier.c@{gestion\-\_\-fichier.\-c}}
+\subsubsection[{init\-\_\-fichier\-\_\-compression}]{\setlength{\rightskip}{0pt plus 5cm}int init\-\_\-fichier\-\_\-compression (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{nom\-\_\-fin, }
+\item[{const char $\ast$}]{nom\-\_\-fout}
+\end{DoxyParamCaption}
+)}}\label{gestion__fichier_8c_a4eea16a928067a50fd2b888b19e21e8a}
+
+
+Fonction qui initialise les fichiers lors de la compression. 
+
+Ouvre le fichiers d'entrée en lecture et en mode texte et le fichier de sortie en écriture et en mode binaire, écrase les données du fichier si il existe, sinon le créé 
+\begin{DoxyParams}{Parameters}
+{\em nom\-\_\-fin} & \-: le fichier d'entree nom\-\_\-fout\-: le fichier de sortie \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\hypertarget{gestion__fichier_8c_adc729d4ecf98b823fb08a98eb080943f}{\index{gestion\-\_\-fichier.\-c@{gestion\-\_\-fichier.\-c}!init\-\_\-fichier\-\_\-decompression@{init\-\_\-fichier\-\_\-decompression}}
+\index{init\-\_\-fichier\-\_\-decompression@{init\-\_\-fichier\-\_\-decompression}!gestion_fichier.c@{gestion\-\_\-fichier.\-c}}
+\subsubsection[{init\-\_\-fichier\-\_\-decompression}]{\setlength{\rightskip}{0pt plus 5cm}int init\-\_\-fichier\-\_\-decompression (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{nom\-\_\-in, }
+\item[{const char $\ast$}]{nom\-\_\-out}
+\end{DoxyParamCaption}
+)}}\label{gestion__fichier_8c_adc729d4ecf98b823fb08a98eb080943f}
+
+
+Fonction qui initialise les fichiers lors de la decompression. 
+
+Ouvre le fichiers d'entrée en lecture et en mode binaire et le fichier de sortie en écriture et en mode texte, écrase les données du fichier si il existe, sinon le créé 
+\begin{DoxyParams}{Parameters}
+{\em nom\-\_\-fin} & \-: le fichier d'entree nom\-\_\-fout\-: le fichier de sortie \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\hypertarget{gestion__fichier_8c_a35050da77b13f2db7ccd0bed4751ac6f}{\index{gestion\-\_\-fichier.\-c@{gestion\-\_\-fichier.\-c}!lire\-\_\-char@{lire\-\_\-char}}
+\index{lire\-\_\-char@{lire\-\_\-char}!gestion_fichier.c@{gestion\-\_\-fichier.\-c}}
+\subsubsection[{lire\-\_\-char}]{\setlength{\rightskip}{0pt plus 5cm}int lire\-\_\-char (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{gestion__fichier_8c_a35050da77b13f2db7ccd0bed4751ac6f}
+
+
+Fonction qui lit un caractere. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em void} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\hypertarget{gestion__fichier_8c_aead7cc6a84d13ad7f4825676bef080db}{\index{gestion\-\_\-fichier.\-c@{gestion\-\_\-fichier.\-c}!lire\-\_\-code@{lire\-\_\-code}}
+\index{lire\-\_\-code@{lire\-\_\-code}!gestion_fichier.c@{gestion\-\_\-fichier.\-c}}
+\subsubsection[{lire\-\_\-code}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int lire\-\_\-code (
+\begin{DoxyParamCaption}
+\item[{int}]{taille}
+\end{DoxyParamCaption}
+)}}\label{gestion__fichier_8c_aead7cc6a84d13ad7f4825676bef080db}
+
+
+Fonction qui lit un code dans le fichier en fonction du nbre de bits. 
+
+Retourne le code lu dans le fichier d'entrée en fonction du nombre bit donné par la taille, ou 257 si le pointeur est à la fin du fichier (End\-\_\-\-Of\-\_\-\-File) 
+\begin{DoxyParams}{Parameters}
+{\em taille} & le nbre de bts qu'on veut lire \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int \-: le code lu 
+\end{DoxyReturn}
