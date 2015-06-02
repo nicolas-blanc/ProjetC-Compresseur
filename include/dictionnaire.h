@@ -9,6 +9,7 @@
 #define TAILLE_MAX_CHAINE 12
 #define TAILLE_DICO 256
 #define TAILLE_HASHMAP 4096
+#define CODE_EOF TAILLE_DICO-1
 
 
 typedef struct cell cell;
@@ -59,7 +60,7 @@ void add(char* c);
 ////////////////////////////////////////////////////////////////
 // Author : Coralie
 //
-int getSize();
+int getSize(char c);
 
 
 ////////////////////////////////////////////////////////////////

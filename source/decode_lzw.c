@@ -9,70 +9,44 @@ void concat_decode( char * dest, char reste) {
 
 void decode() {
 
-	int taille;
-	uint16_t code; //int pour gérér les codes >255
-	char * chaine = malloc( TAILLE_MAX_CHAINE * sizeof(char));
-	char * entree = malloc( TAILLE_MAX_CHAINE * sizeof(char));
-	char * temp = malloc( TAILLE_MAX_CHAINE * sizeof(char));
+    int taille = getSize('c');
+    int nextCode;
+    int code = lire_code(taille);
+    //printf("On lit le code : %i en char : |%s\\0 avec une taille : %i\n",code,getCharByCode(code),taille);
+    char* octet = malloc(sizeof(char)*2);
+    char* chaine = malloc(sizeof(char)*TAILLE_MAX_CHAINE);
 
-	init();
-	taille = getSize();
-	code = lire_code(taille); // TODO : lire_code : ok
-	chaine = getCharByCode(code);
+    strcpy(octet,getCharByCode(code));
+    octet[1] = '\0';
+    strcpy(chaine,octet);
+    ecrire_char(chaine);
+    while(code != CODE_EOF)
+    {
+        taille = getSize('d');
+        nextCode = lire_code(taille);
+        //printf("SizeOfDico : %i\nOn lit le code : %i en char : |%s\\0 avec une taille : %i\n",sizeOfDico,nextCode,getCharByCode(nextCode),taille);
+        char* nextChaine = malloc(sizeof(char)*TAILLE_MAX_CHAINE);
 
-	ecrire_char(chaine);
-	while(code != 257)
-	{
-		#ifdef DEBUG
-			printf("-------------------- Nouvelle boucle --------------------\n");
-		#endif
+        if(getCharByCode(nextCode) == NULL)
+        {
+            strcpy(nextChaine,getCharByCode(code));
+            strcat(nextChaine,octet);
+        } else {
+            strcpy(nextChaine,getCharByCode(nextCode));
+        }
 
-		taille = getSize();
-		code = lire_code(taille);
+        ecrire_char(nextChaine);
+        octet[0] = nextChaine[0];
+        chaine = strcat(chaine,octet);
+        //if(code == 294){printf("On ajoute 296 ! |%s\\0\n",chaine);}
+        add(chaine);
+        chaine = malloc(sizeof(char)*TAILLE_MAX_CHAINE);
+        code = nextCode;
+        //printf("Le nouveau code est : %i\n",code);
+        strcpy(chaine,getCharByCode(code));
+    }
+    //display();
 
-		if(code != 257) //pour pas écrire le EOF
-		{
-			if(getCharByCode(code) == NULL)  {// si temp n'est pas dans le dico
-				strcpy(temp,chaine);
-				concat_decode(temp, chaine[0]);
-				strcpy(entree,temp);
-			}
-			else
-				entree = getCharByCode(code);
-
-			#ifdef DEBUG
-				printf("Chaine a ecrire dans le fichier : %s/\n\n", entree);
-			#endif
-
-			ecrire_char(entree);
-			concat_decode(chaine, entree[0]);
-
-			#ifdef DEBUG
-				printf("Chaine ajoute dans le dico : %s/\n", chaine);
-			#endif
-
-			if (code != 257) {
-                add(chaine);
-                chaine = malloc(sizeof(char)*TAILLE_MAX_CHAINE);
-			}
-
-			strcpy(chaine,entree);
-		}
-
-		#ifdef DEBUG
-			printf("\n---------------------------------------------------------\n\n");
-		#endif
-
-	}
-
-	//free(chaine);
-	//free(entree);
-	//free(temp);
-
-	#ifdef DEBUG
-		display();
-		printf("Fin du programme\n");
-	#endif
 }
 
 /*

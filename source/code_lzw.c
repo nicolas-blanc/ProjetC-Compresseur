@@ -34,7 +34,7 @@ void code() {
 	#endif
 
 	char c;
-	int taille;
+	int taille = getSize('c');
 	char * chaine = malloc( TAILLE_MAX_CHAINE * sizeof(char));
 	//char * entree = malloc( TAILLE_MAX_CHAINE * sizeof(char));
 	char * temp = malloc( TAILLE_MAX_CHAINE * sizeof(char));
@@ -70,35 +70,36 @@ void code() {
 			}
 			else
 			{
-				taille = getSize();
+				//taille = getSize();
 
 				code = getCodeByChar(chaine);
 
 				#ifdef DEBUG
 					printf("Chaine : %s/ ,Code a ecrire (hexa) : %04x, Code a ecrire (Decimal) : %d, taille : %d\n",chaine, code, code, taille);
 				#endif
-
+                //printf("On ecrit le code : %i avec une taille de : %i et le dico fait %i\n",code,taille,sizeOfDico);
 				ecrire_code(code,taille);
 				concat_code(chaine, c);
 
 				add(chaine);
+				taille = getSize('c');
                 chaine =  malloc(TAILLE_MAX_CHAINE * sizeof(char));
 				#ifdef DEBUG
-					taille = getSize();
+					taille = getSize('c');
 					code = getCodeByChar(chaine);
 					printf("Chaine ajoute : %s/, nouvelle taille : %d\n",chaine, taille);
 				#endif
 
 				sprintf(chaine, "%c",c);
 			}
-
+            //display();
 			#ifdef DEBUG
 				printf("\n---------------------------------------------------------\n\n");
 			#endif
 		//}
 	}
 
-	taille = getSize();
+	taille = getSize('c');
 	code = getCodeByChar(chaine);
 
 	#ifdef DEBUG
@@ -106,14 +107,14 @@ void code() {
 	#endif
 
 //	ecrire_code(code,taille);
-
-	fin_de_fichier(257,taille);
+    printf("On ecrit le code : %i\n",CODE_EOF);
+	fin_de_fichier(CODE_EOF,taille);
 //	fin_de_fichier(CODE_EOF,taille);
 
 	//free(chaine);
 	//free(entree);
 	//free(temp);
-
+    //display();
 	#ifdef DEBUG
 		display();
 		printf("Fin du programme\n");

@@ -20,7 +20,7 @@ char* getCharByCode(unsigned int c)
 	{
 		#ifdef DEBUG
 			printf("getCharByCode c > 257 // c = %d && sizeOfDico : %i\n", c,sizeOfDico);
-		#endif        
+		#endif
 		return hashmap[c]->string;
 	} else
 	{
@@ -46,7 +46,7 @@ unsigned int getCodeByChar(char* c)
 
 void add(char* c) {
 
-	if(getSize()==13) {
+	if(sizeOfDico >= TAILLE_HASHMAP) {
 		reset();
 	}
 
@@ -85,6 +85,7 @@ void add(char* c) {
 			#ifdef DEBUG
 			printf("ERREUR : le caractere appartient deja au dictionnaire\n");
 			#endif
+			free(currentCell);
 			return;
 		}
 
@@ -94,7 +95,7 @@ void add(char* c) {
 			printf("currentCell : %s \n", currentCell->string);
 			printf("on trouve le premier caractere, le pointeur n'est pas null et la longueur est superieure a 2 : on poursuit la recherche\n");
 			#endif
-			currentCell = dico[(int)c[i]]; //on recupere un pointeur vers la bonne liste chainee
+			*currentCell = *dico[(int)c[i]]; //on recupere un pointeur vers la bonne liste chainee
 			#ifdef DEBUG
 			printf("currentCell : %s \n", currentCell->string);
 			#endif
@@ -135,6 +136,7 @@ void add(char* c) {
 					currentCell->next = newCell;
 					sizeOfDico++;
 					hashmap[newCell->code]=newCell;
+					free(currentCell);
 					return;
 				}
 
@@ -143,6 +145,7 @@ void add(char* c) {
 					#ifdef DEBUG
 					printf("ERREUR : la chaine de caractere appartient deja au dictionnaire\n");
 					#endif
+					free(currentCell);
 					return;
 				}
 
@@ -168,11 +171,13 @@ void add(char* c) {
 					currentCell->down = newCell;
 					sizeOfDico++;
 					hashmap[newCell->code]=newCell;
+					free(currentCell);
 					return;
 				}
 				//Sinon on ne peut ajouter le caractere
 				else  {
 					printf("ERREUR : la chaine de caractere ne peut pas etre ajoute car le debut de cette chaine n'appartient pas au dictionnaire\n");
+					free(currentCell);
 					return;
 				}
 			}
@@ -186,6 +191,7 @@ void add(char* c) {
 			dico[(int)c[i]] = newCell;
 			sizeOfDico++;
 			hashmap[newCell->code]=newCell;
+			free(currentCell);
 			return;
 		}
 
@@ -194,6 +200,7 @@ void add(char* c) {
 			#ifdef DEBUG
 			printf("ERREUR : on n'a pas trouve le premier caractere dans le tableau : la chaine ne peut pas etre ajoute\n");
 			#endif
+			free(currentCell);
 			return;
 		}
 	}
@@ -202,12 +209,12 @@ void add(char* c) {
 
 ////////////////////////////////////////////////////////////////
 // Author : Quentin
-int getSize()
+int getSize(char c)
 {
 	#ifdef DEBUG
 	printf("taille dico : %i | log(tailledico)/log(2) : %f \n ", sizeOfDico, ceil(log(sizeOfDico + 1)/log(2)));
 	#endif
-	return ceil(log(sizeOfDico + 1)/log(2));
+	return (c == 'c')?ceil(log(sizeOfDico)/log(2)):ceil(log(sizeOfDico+1)/log(2));
 }
 
 ////////////////////////////////////////////////////////////////
@@ -249,6 +256,7 @@ int isExist(char* c){
 		#ifdef DEBUG
 		printf("on trouve le premier caractere et celui ci est l'unique caractere de la chaine : on retourne le code\n");
 		#endif
+		free(currentCell);
 		return (int)c[i];
 	}
 
@@ -257,7 +265,7 @@ int isExist(char* c){
 		#ifdef DEBUG
 		printf("on trouve le premier caractere et le pointeur n'est pas null : on poursuit la recherche\n");
 		#endif
-		currentCell = dico[(int)c[i]]; //on recupere un pointeur vers la bonne liste chainee
+		*currentCell = *dico[(int)c[i]]; //on recupere un pointeur vers la bonne liste chainee
 		#ifdef DEBUG
 		printf("currentCell : %s \n", currentCell->string);
 		#endif
@@ -294,6 +302,7 @@ int isExist(char* c){
 				#ifdef DEBUG
 				printf("la chaine de caractere ne correspond pas && next point vers NULL : la chaine de caractere n'est pas presente dans le dictionnaire\n");
 				#endif
+				free(currentCell);
 				return -1;
 			}
 
@@ -302,7 +311,9 @@ int isExist(char* c){
 				#ifdef DEBUG
 				printf("la chaine de caractere correspond et sa longueur est egale a la longueur de la chaine initialement recherche : on renvoie le code correspondant\n");
 				#endif
-				return currentCell->code;
+				int code = currentCell->code;
+				free(currentCell);
+				return code;
 			}
 
 			//Si la chaine de caractere correspond au champ string && down pointe vers la suite de la liste chainee : on poursuit la recherche
@@ -323,6 +334,7 @@ int isExist(char* c){
 				#ifdef DEBUG
 				printf("la chaine de caractere ne correspond pas && down point vers NULL : la chaine de caractere n'est pas presente dans le dictionnaire\n");
 				#endif
+				free(currentCell);
 				return -1;
 			}
 		}
@@ -333,7 +345,7 @@ int isExist(char* c){
 		#ifdef DEBUG
 		printf("on trouve le premier caractere et le pointeur est null : la chaine ne se trouve pas dans le dictionnaire\n");
 		#endif
-
+        free(currentCell);
 		return -1;
 	}
 
@@ -342,10 +354,10 @@ int isExist(char* c){
 		#ifdef DEBUG
 		printf("on n'a pas trouve le premier caractere dans le tableau : la chaine ne se trouve pas dans le dictionnaire\n");
 		#endif
-
+        free(currentCell);
 		return -1;
 	}
-
+    free(currentCell);
 	return -1;
 }
 
