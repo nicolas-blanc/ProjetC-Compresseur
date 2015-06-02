@@ -4,7 +4,7 @@ EXECS=code_lzw#lumino_lzw
 CC=gcc -g 
 OPT= -O3
 CFLAGS= -Wall -I include/ 
-OPTION=-DDEBUG
+OPTION=#-DDEBUG
 
 all: $(EXECS)
 

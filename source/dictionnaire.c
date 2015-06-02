@@ -8,15 +8,15 @@ int sizeOfDico = TAILLE_DICO;
 //
 char* getCharByCode(unsigned int c)
 {
-    if (c > 0 && c < 256)
+    if (c > 0 && c < 255)
     {
         char* code = malloc(sizeof(char));
         code[0]=(char)c;
         return code;
-    } else if (c == 257)
+    } else if (c == 255)
     {
         return "\0";
-    } else if (c > 257)
+    } else if (c > 255)
     {
     	printf("getCharByCode c > 257 // c = %d\n", c);
         return hashmap[c]->string;
@@ -44,6 +44,10 @@ unsigned int getCodeByChar(char* c)
 
 void add(char* c) {
 
+    if(getSize()==13) {
+        reset();
+    }
+
     if (c != NULL) {
 
         int sizec = strlen(c); //permet de recuperer la taille de la chaine
@@ -52,6 +56,7 @@ void add(char* c) {
         char* newc = malloc(sizeof(char)*sizec+1); // chaine de caractere formee peu a peu a partir de c
         char suitec[2]; //permettra de recuperer le prochain caractere sous forme de string
         newc[0] = c[0];
+        newc[1] = '\0';
 
         // On prepare notre nouvelle cell pour l'ajout dans le dictionnaire
         cell* newCell = malloc(sizeof(cell));
@@ -84,9 +89,13 @@ void add(char* c) {
         // Si le premier caractere correspond a une case du tableau && le pointeur n'est pas null && sizec > 2 : on poursuit la recherche dans la liste chainee pointe
         else if ((int)c[i] >= 0 && (int)c[i] <= (TAILLE_DICO - 1) && dico[(int)c[i]] != NULL && sizec >= 2) {
             #ifdef DEBUG
+            printf("currentCell : %s \n", currentCell->string);
             printf("on trouve le premier caractere, le pointeur n'est pas null et la longueur est superieure a 2 : on poursuit la recherche\n");
             #endif
             currentCell = dico[(int)c[i]]; //on recupere un pointeur vers la bonne liste chainee
+            #ifdef DEBUG
+            printf("currentCell : %s \n", currentCell->string);
+            #endif
 
             /**On parcours les listes chaines pour trouver la chaine de caractere (apres parcours du tableau)*/
             for (i=1; i < sizec; i++){
@@ -106,16 +115,20 @@ void add(char* c) {
                 //Si la chaine de caractere ne correspond pas au champ string  : on poursuit la recherche tant que next pointe vers la suite de la liste chainee
                 while (!(strcmp(currentCell->string,newc) == 0) && currentCell->next != NULL) {
                     #ifdef DEBUG
+                    printf("currentCell : %s \n", currentCell->string);
                     printf("la chaine de caractere ne correspond pas au champ string : on poursuit la recherche tant que next pointe vers la suite de la liste chainee\n");
                     #endif
                     currentCell = currentCell->next;
+                    #ifdef DEBUG
+                    printf("currentCell : %s \n", currentCell->string);
+                    #endif
                 }
 
                 //Si la chaine de caractere ne correspond pas au champ string && next point vers NULL : on ajoute la chaine de caractere en next
                 if(!(strcmp(currentCell->string,newc) == 0) && currentCell->next == NULL) {
                     /** On insert en next */
                     #ifdef DEBUG
-                    printf("la chaine de caractere ne correspond && next point vers NULL : Ajout en next \nOn ajoute %s au next de %s\n",newCell->string,currentCell->string);
+                    printf("la chaine de caractere ne correspond && next point vers NULL : Ajout en next \n On ajoute %s au next de %s\n",newCell->string,currentCell->string);
                     #endif
                     currentCell->next = newCell;
                     sizeOfDico++;
@@ -134,9 +147,13 @@ void add(char* c) {
                 //Si la chaine de caractere correspond au champ string && down pointe vers la suite de la liste chainee : on poursuit la recherche
                 else if ((strcmp(currentCell->string,newc) == 0) && currentCell->down != NULL) {
                     #ifdef DEBUG
+                    printf("currentCell : %s \n", currentCell->string);
                     printf("la chaine de caractere correspond && down pointe vers la suite de la liste chainee : on poursuit la recherche\n");
                     #endif
                     currentCell = currentCell->down;
+                    #ifdef DEBUG
+                    printf("currentCell : %s \n", currentCell->string);
+                    #endif
                     continue; //on passe a l'itration suivante
                 }
 
@@ -144,7 +161,7 @@ void add(char* c) {
                 else if ((strcmp(currentCell->string,newc) == 0) && currentCell->down == NULL && (sizec - strlen(newc)) == 1) {
                     /** On insert en down */
                     #ifdef DEBUG
-                    printf("la chaine de caractere ne correspond pas && down point vers NULL : Ajout en down \nOn ajoute %s en down de %s\n",newCell->string,currentCell->string);
+                    printf("la chaine de caractere ne correspond pas && down point vers NULL : Ajout en down \n On ajoute %s en down de %s\n",newCell->string,currentCell->string);
                     #endif
                     currentCell->down = newCell;
                     sizeOfDico++;
@@ -238,13 +255,16 @@ int isExist(char* c){
         printf("on trouve le premier caractere et le pointeur n'est pas null : on poursuit la recherche\n");
         #endif
         currentCell = dico[(int)c[i]]; //on recupere un pointeur vers la bonne liste chainee
+        #ifdef DEBUG
+        printf("currentCell : %s \n", currentCell->string);
+        #endif
 
         /**On parcours les listes chaines pour trouver la chaine de caractere (apres parcours du tableau)*/
         for (i=1; i < sizec; i++){
 
             // On recupere la nouvelle chaine de caractere a rechercher dans la liste chainee
             #ifdef DEBUG
-            printf("Anciene chaine : %s\n",newc);
+            printf("Ancienne chaine : %s\n",newc);
             printf("Prochaine caractere a concatener : %c\n",c[i]);
             #endif
             suitec[0] = c[i];
@@ -257,9 +277,13 @@ int isExist(char* c){
             //Si la chaine de caractere ne correspond pas au champ string on poursuit la recherche tant que next pointe vers la suite de la liste chainee
             while (!(strcmp(currentCell->string,newc) == 0) && currentCell->next != NULL) {
                 #ifdef DEBUG
+                printf("currentCell : %s \n", currentCell->string);
                 printf("la chaine de caractere ne correspond pas : on poursuit la recherche tant que next pointe vers la suite de la liste chainee\n");
                 #endif
                 currentCell = currentCell->next;
+                #ifdef DEBUG
+                printf("currentCell : %s \n", currentCell->string);
+                #endif
             }
 
             //Si la chaine de caractere ne correspond pas au champ string && next point vers NULL alors la chaine de caractere n'est pas presente dans le dictionnaire
@@ -281,9 +305,13 @@ int isExist(char* c){
             //Si la chaine de caractere correspond au champ string && down pointe vers la suite de la liste chainee : on poursuit la recherche
             else if ((strcmp(currentCell->string,newc) == 0) && currentCell->down != NULL) {
                 #ifdef DEBUG
+                printf("currentCell : %s \n", currentCell->string);
                 printf("la chaine de caractere correspond && down pointe vers la suite de la liste chainee : on poursuit la recherche\n");
                 #endif
                 currentCell = currentCell->down;
+                #ifdef DEBUG
+                printf("currentCell : %s \n", currentCell->string);
+                #endif
                 continue; //on passe a l'itration suivante
             }
 
