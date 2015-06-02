@@ -7,7 +7,7 @@
 
 #define TAILLE_MAX_CODE 12
 #define TAILLE_MAX_CHAINE 12
-#define TAILLE_DICO 258
+#define TAILLE_DICO 256
 #define TAILLE_HASHMAP 4096
 
 

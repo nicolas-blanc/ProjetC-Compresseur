@@ -8,15 +8,15 @@ int sizeOfDico = TAILLE_DICO;
 //
 char* getCharByCode(unsigned int c)
 {
-    if (c > 0 && c < 256)
+    if (c > 0 && c < 255)
     {
         char* code = malloc(sizeof(char));
         code[0]=(char)c;
         return code;
-    } else if (c == 257)
+    } else if (c == 255)
     {
         return "\0";
-    } else if (c > 257)
+    } else if (c > 255)
     {
     	printf("getCharByCode c > 257 // c = %d\n", c);
         return hashmap[c]->string;
@@ -43,6 +43,10 @@ unsigned int getCodeByChar(char* c)
 // on ne peut ajouter une chaines de longueur n uniquement si le debut de chaine de longueur n-1 est deja dans le dictionnaire
 
 void add(char* c) {
+
+    if(getSize()==13) {
+        reset();
+    }
 
     if (c != NULL) {
 

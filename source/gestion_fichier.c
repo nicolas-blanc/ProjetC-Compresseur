@@ -48,7 +48,7 @@ int init_fichier_compression(char * nom_fin, char * nom_fout) {
 	#ifdef DEBUG
 		printf("Fin init_fichier_compression\n");
 	#endif
-		
+
 	return e;
 }
 
@@ -56,7 +56,7 @@ int init_fichier_decompression(char * nom_fin, char * nom_fout) {
 	#ifdef DEBUG
 		printf("Debut init_fichier_decompression -- fin : %s -- fout : %s \n", nom_fin, nom_fout);
 	#endif
-	
+
 	fin = NULL;
 	fout = NULL;
 	fdf = -1;
@@ -93,7 +93,7 @@ int init_fichier_decompression(char * nom_fin, char * nom_fout) {
 	#ifdef DEBUG
 		printf("Fin init_fichier_decompression\n");
 	#endif
-		
+
 	return e;
 }
 
@@ -206,9 +206,9 @@ int lire_char() {
 	int car = 0;
 	if (fdf != 0) {
 		car = fgetc(fin);
-		
+
 		if(car == EOF) { fdf = 0; car = -1; }
-	
+
 	} else { car = -1; }
 
 	return car;
