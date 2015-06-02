@@ -7,12 +7,12 @@
 /*
  * Ouvre le fichiers d'entrée en lecture et en mode texte et le fichier de sortie en écriture et en mode binaire, écrase les données du fichier si il existe, sinon le créé
  */
-int init_fichier_compression(char * nom_fin, char * nom_fout);
+int init_fichier_compression(const char * nom_fin, const char * nom_fout);
 
 /*
  * Ouvre le fichiers d'entrée en lecture et en mode binaire et le fichier de sortie en écriture et en mode texte, écrase les données du fichier si il existe, sinon le créé
  */
-int init_fichier_decompression(char * nom_in, char * nom_out);
+int init_fichier_decompression(const char * nom_in, const char * nom_out);
 
 /*
  * Ferme les fichiers d'entrée et de sortie

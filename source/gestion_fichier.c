@@ -10,7 +10,7 @@ static int fdf;
 static uint32_t buffer;
 static int nb_buf;
 
-int init_fichier_compression(char * nom_fin, char * nom_fout) {
+int init_fichier_compression(const char * nom_fin, const char * nom_fout) {
 	#ifdef DEBUG
 		printf("Debut init_fichier_compression\n");
 	#endif
@@ -26,21 +26,21 @@ int init_fichier_compression(char * nom_fin, char * nom_fout) {
 /*
 	char * ajout_fin = malloc (sizeof(char) * (strlen(nom_fin) + 3));
 	strcpy(ajout_fin,"../");
-	char * ajout_fout = malloc (sizeof(char) * (strlen(nom_fout) + 3));
-	strcpy(ajout_fout,"../");
 
 	strcat(ajout_fin,nom_fin);
 	strcat(ajout_fout,nom_fout);
 */
-	strcat(nom_fout,".z");
+	char * ajout_fout = malloc (sizeof(char) * (strlen(nom_fout) + 2));
+	strcpy(ajout_fout,nom_fout);
+	strcat(ajout_fout,".z");
 
 	#ifdef DEBUG
 		printf("Nom final du fichier fin : %s\n", nom_fin);
-		printf("Nom final du fichier fout : %s\n", nom_fout);
+		printf("Nom final du fichier fout : %s\n", ajout_fout);
 	#endif
 
 	fin = fopen(nom_fin,"r");
-	fout = fopen(nom_fout,"wb");
+	fout = fopen(ajout_fout,"wb");
 
 	if (fin == NULL || fout == NULL)
 		e--;
@@ -52,7 +52,7 @@ int init_fichier_compression(char * nom_fin, char * nom_fout) {
 	return e;
 }
 
-int init_fichier_decompression(char * nom_fin, char * nom_fout) {
+int init_fichier_decompression(const char * nom_fin, const char * nom_fout) {
 	#ifdef DEBUG
 		printf("Debut init_fichier_decompression -- fin : %s -- fout : %s \n", nom_fin, nom_fout);
 	#endif
@@ -66,8 +66,6 @@ int init_fichier_decompression(char * nom_fin, char * nom_fout) {
 	int e = 0;
 
 /*
-	char * ajout_fin = malloc (sizeof(char) * (strlen(nom_fin) + 3));
-	strcpy(ajout_fin,"../");
 	char * ajout_fout = malloc (sizeof(char) * (strlen(nom_fout) + 3));
 	strcpy(ajout_fout,"../");
 
@@ -75,14 +73,16 @@ int init_fichier_decompression(char * nom_fin, char * nom_fout) {
 
 	strcat(ajout_fin,nom_fin);
 */
-//	strcat(nom_fin,".z");
+	char * ajout_fin = malloc (sizeof(char) * (strlen(nom_fin) + 3));
+	strcpy(ajout_fin,nom_fin);
+	strcat(ajout_fin,".z");
 
 	#ifdef DEBUG
-		printf("Nom final du fichier fin : %s\n", nom_fin);
+		printf("Nom final du fichier fin : %s\n", ajout_fin);
 		printf("Nom final du fichier fout : %s\n", nom_fout);
 	#endif
 
-	fin = fopen(nom_fin,"rb");
+	fin = fopen(ajout_fin,"rb");
 	fout = fopen(nom_fout,"w");
 
 	if (fin == NULL || fout == NULL)
