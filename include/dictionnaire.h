@@ -79,4 +79,8 @@ int isExist(char* c);
 //
 void reset();
 
+void display();
+
+void displaySSCell(cell* ssdico);
+
 #endif

@@ -181,9 +181,6 @@ void add(char* c) {
 }
 
 
-
-
-
 ////////////////////////////////////////////////////////////////
 // Author : Quentin
 int getSize()
@@ -305,6 +302,7 @@ int isExist(char* c){
         #ifdef DEBUG
         printf("on trouve le premier caractere et le pointeur est null : la chaine ne se trouve pas dans le dictionnaire\n");
         #endif
+
         return -1;
     }
 
@@ -313,8 +311,10 @@ int isExist(char* c){
         #ifdef DEBUG
         printf("on n'a pas trouve le premier caractere dans le tableau : la chaine ne se trouve pas dans le dictionnaire\n");
         #endif
+
         return -1;
     }
+
     return -1;
 }
 
@@ -329,3 +329,35 @@ void reset(){
 	}
 	init();
 }
+
+
+void display(){
+    int i;
+    cell* currentCell;
+    for(i=0;i<TAILLE_DICO;i++)
+    {
+
+        currentCell = dico[i];
+        if(currentCell != NULL) {
+            printf("----------------\n");
+            printf("--Case : %c\\0---\n",(char)i);
+            printf("----------------\n\n");
+            printf("Char : %s | Code : %i | Down : %s | Next : %s \t--->\t ",currentCell->string,currentCell->code,(currentCell->down == NULL)?"Null":currentCell->down->string,(currentCell->next == NULL)?"Null":currentCell->next->string);
+            if(currentCell->next != NULL){displaySSCell(currentCell->next);}
+            printf("\n\n");
+            if(currentCell->down != NULL){displaySSCell(currentCell->down);}
+            printf("\n");
+        }
+
+    }
+
+}
+
+void displaySSCell(cell* ssdico){
+
+    printf("Char : %s | Code : %i | Down : %s | Next : %s \t--->\t ",ssdico->string,ssdico->code,(ssdico->down == NULL)?"Null":ssdico->down->string,(ssdico->next == NULL)?"Null":ssdico->next->string);
+    if(ssdico->next != NULL){displaySSCell(ssdico->next);}
+    printf("\n\n");
+    if(ssdico->down != NULL){displaySSCell(ssdico->down);}
+}
+

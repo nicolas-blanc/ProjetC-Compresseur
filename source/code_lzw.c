@@ -52,7 +52,7 @@ void code(){
 		#endif
 
 		c = lire_char();
-		printf("Caractere lu : %c/\n", c);
+		//printf("Caractere lu : %c/\n", c);
 
 			//if (c != -1) {
 			strcpy(temp,chaine);
@@ -140,4 +140,4 @@ int main(int argc, char* argv[]){
     close();
    return 0;
 }
-*/
+
