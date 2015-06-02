@@ -5,17 +5,27 @@
 #include <string.h>
 #include <stdlib.h>
  /*==============ALGO =======================
+
   initialize table: 0 to 255 = code for individual bytes
+
   string= get input symbols
+
   while theree are still input symbols
+
 	symbol= get input symbol
+
 	if STRING + SYMBOL is in TABLE:
+
 		STRING = STRING + SYMBOL
+
 	else:
+
 		output the code for STRING
 		add STRING + SYMBOL to TABLE
 		STRING = SYMBOL
+
   output the code for STRING
+
 //==========================================*/
 
 void concat_code( char * dest, char reste) {
@@ -37,7 +47,7 @@ void code(){
 	char c;
 	int taille;
 	char * chaine = malloc( TAILLE_MAX_CHAINE * sizeof(char));
-	//char * entree = malloc( TAILLE_MAX_CHAINE * sizeof(char));
+	char * entree = malloc( TAILLE_MAX_CHAINE * sizeof(char));
 	char * temp = malloc( TAILLE_MAX_CHAINE * sizeof(char));
 	uint16_t code;
 
@@ -77,13 +87,13 @@ void code(){
 				code = getCodeByChar(chaine);
 
 				#ifdef DEBUG
-					printf("Chaine : %s/ ,Code a ecrire (hexa) : %04x, Code a ecrire (Decimal) : %d, taille : %d\n",chaine, code, code, taille);
+					printf("Chaine : %s/ ,Code a ecrire : %04x, taille : %d\n",chaine, code, taille);
 				#endif
 
 				ecrire_code(code,taille);
 				concat_code(chaine, c);
 				add(chaine);
-                chaine =  malloc(TAILLE_MAX_CHAINE * sizeof(char));
+
 				#ifdef DEBUG
 					taille = getSize();
 					code = getCodeByChar(chaine);
@@ -110,9 +120,9 @@ void code(){
 
 	fin_de_fichier(257,taille);
 
-	//free(chaine);
-	//free(entree);
-	//free(temp);
+	free(chaine);
+	free(entree);
+	free(temp);
 
 	#ifdef DEBUG
 		printf("Fin du programme\n");
@@ -120,14 +130,17 @@ void code(){
 
 }
 
-
 /*
 int main(int argc, char* argv[]){
+
+
     // Lecture des arguments sur la ligne de commande
+
     if ( argc != 3 ){
         fprintf(stderr,"vous n'avez pas saisi les bons arguments :\n\tex: code_lwz fichier.txt sortie\n");
         exit(EXIT_FAILURE);
     }
+
     if(init_fichier_compression(argv[1], argv[2]) < 0)
     {
         fprintf(stderr,"Erreur lors de l'ouverture de fichier \n");
@@ -136,8 +149,8 @@ int main(int argc, char* argv[]){
     else
     	code();
 
-    display();
     close();
    return 0;
+
 }
 */
