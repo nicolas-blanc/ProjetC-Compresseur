@@ -54,26 +54,29 @@ void code(){
 		c = lire_char();
 		//printf("Caractere lu : %c/\n", c);
 
-			//if (c != -1) {
+			printf("Chaine : %s/\n", chaine);
+
 			strcpy(temp,chaine);
 			concat_code(temp, c);
 
 			#ifdef DEBUG
-				printf("c : %c/ // Concatener : %s/\n", c, temp);
+				printf("c : %c/ // Concatener : %s/ // Chaine : %s/\n", c, temp, chaine);
 			#endif
 
 			if (isExist(temp) >= 0)
 			{
-				chaine = temp;
+				strcpy(chaine,temp);
 				#ifdef DEBUG
 					printf("Ancienne chaine : %s/ // Nouvelle Chaine : %s/\n", temp, chaine);
 				#endif
-				printf("On est passe la dedans\n");
 
 			}
 			else
 			{
 				taille = getSize();
+
+				printf(" ------------------------- Chaine : %s/\n", chaine);
+
 				code = getCodeByChar(chaine);
 
 				#ifdef DEBUG
@@ -121,7 +124,6 @@ void code(){
 }
 
 
-/*
 int main(int argc, char* argv[]){
     // Lecture des arguments sur la ligne de commande
     if ( argc != 3 ){
@@ -140,4 +142,3 @@ int main(int argc, char* argv[]){
     close();
    return 0;
 }
-
