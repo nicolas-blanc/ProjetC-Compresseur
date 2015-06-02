@@ -1,9 +1,9 @@
 EXECS_TEST=code_lzw decode_lzw #testCodage testDecodage
-EXECS=code_lzw#lumino_lzw
+EXECS=lumino_lzw
 
 CC=gcc -g 
 OPT= -O3
-CFLAGS= -Wall -I include/ 
+CFLAGS= -I include/ 
 OPTION=#-DDEBUG
 
 all: $(EXECS)
@@ -19,8 +19,8 @@ code_lzw: code_lzw.o gestion_fichier.o dictionnaire.o include/dictionnaire.h
 decode_lzw: decode_lzw.o gestion_fichier.o dictionnaire.o include/dictionnaire.h 
 	$(CC) $(OPTION) $(OPT) -o $@ $^ -lm
 
-#lumino_lzw: lzw.o code_lzw.o decode_lzw.o gestion_fichier.o dictionnaire.o include/dictionnaire.h
-#	$(CC) $(OPTION) $(OPT) -o $@ $^ -lm
+lumino_lzw: lzw.o code_lzw.o decode_lzw.o gestion_fichier.o dictionnaire.o include/dictionnaire.h
+	$(CC) $(OPTION) $(OPT) -o $@ $^ -lm
 	
 clean_execs:
 	rm -f $(EXECS) $(EXECS_TEST)

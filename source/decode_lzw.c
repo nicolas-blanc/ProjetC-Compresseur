@@ -1,17 +1,10 @@
-#include "dictionnaire.h"
-#include "gestion_fichier.h"
-
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-
+#include "decode_lzw.h"
 
 void concat_decode( char * dest, char reste) {
 	strcat(dest,&reste);
 }
 
-void decode()
-{
+void decode() {
 
 	int taille;
 	uint16_t code; //int pour gérér les codes >255
@@ -56,13 +49,8 @@ void decode()
 			#endif
 
 			if (code != 257) {
-<<<<<<< HEAD
-				add(chaine);
-				chaine =  malloc(TAILLE_MAX_CHAINE * sizeof(char));
-=======
                 add(chaine);
                 chaine = malloc(sizeof(char)*TAILLE_MAX_CHAINE);
->>>>>>> 1ec7d711cfd930909eb28c2dca1213efc2774952
 			}
 
 			strcpy(chaine,entree);
@@ -79,10 +67,12 @@ void decode()
 	//free(temp);
 
 	#ifdef DEBUG
+		display();
 		printf("Fin du programme\n");
 	#endif
 }
 
+/*
 int main(int argc, char* argv[]){
 
 
@@ -106,3 +96,4 @@ int main(int argc, char* argv[]){
    return 0;
 
 }
+*/

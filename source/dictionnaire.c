@@ -16,13 +16,13 @@ char* getCharByCode(unsigned int c)
     } else if (c == 255)
     {
         return "\0";
-    } else if (c > 255)
+    } else if (c > 255 && c < sizeOfDico)
     {
-    	printf("getCharByCode c > 257 // c = %d\n", c);
+    	printf("getCharByCode c > 257 // c = %d && sizeOfDico : %i\n", c,sizeOfDico);
         return hashmap[c]->string;
     } else
     {
-        return "";
+        return NULL;
     }
 
 }
@@ -205,7 +205,7 @@ int getSize()
     #ifdef DEBUG
     printf("taille dico : %i | log(tailledico)/log(2) : %f \n ", sizeOfDico, ceil(log(sizeOfDico)/log(2)));
     #endif
-	return ceil(log(sizeOfDico)/log(2));
+	return ceil(log(sizeOfDico + 1)/log(2));
 }
 
 ////////////////////////////////////////////////////////////////
@@ -213,6 +213,7 @@ int getSize()
 void init()
 {
 	int i;
+    sizeOfDico = TAILLE_DICO;
 	for(i=0;i<TAILLE_DICO;i++)
 	{
 		//dico[i] = malloc(sizeof(cell));
@@ -352,7 +353,9 @@ int isExist(char* c){
 // Author : Quentin
 void reset(){
 	int i;
+    //printf("Taille dico : %i\n",sizeOfDico);
 	for(i=0;i<sizeOfDico;i++){
+        //printf("On libere %i\n",i);
 		free(hashmap[i]);
 	}
 	init();

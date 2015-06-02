@@ -1,10 +1,6 @@
-#include "dictionnaire.h"
-#include "gestion_fichier.h"
+#include "code_lzw.h"
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
- /*==============ALGO =======================
+/*==============ALGO =======================
   initialize table: 0 to 255 = code for individual bytes
   string= get input symbols
   while theree are still input symbols
@@ -19,10 +15,13 @@
 //==========================================*/
 
 void concat_code( char * dest, char reste) {
+	char temp[2];
+	temp[0] = reste;
+	temp[1] = '\0';
 	strcat(dest,&reste);
 }
 
-void code(){
+void code() {
 
 	#ifdef DEBUG
 		printf("Debut de l'initialisation\n");
@@ -112,18 +111,20 @@ void code(){
 //	ecrire_code(code,taille);
 
 	fin_de_fichier(257,taille);
+//	fin_de_fichier(CODE_EOF,taille);
 
 	//free(chaine);
 	//free(entree);
 	//free(temp);
 
 	#ifdef DEBUG
+		display();
 		printf("Fin du programme\n");
 	#endif
 
 }
 
-
+/*
 int main(int argc, char* argv[]){
     // Lecture des arguments sur la ligne de commande
     if ( argc != 3 ){
@@ -138,7 +139,8 @@ int main(int argc, char* argv[]){
     else
     	code();
 
-    display();
+    // display();
     close();
    return 0;
 }
+*/
